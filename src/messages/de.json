@@ -1,0 +1,246 @@
+{
+  "meta": {
+    "title": "Prestige Selections Freiburg — Sportwagen & Klassiker",
+    "description": "Sportwagen- und Klassiker-Händler in Freiburg. Ferrari, Porsche, Lamborghini, Bentley, Rolls-Royce, Aston Martin. Über 900 Fahrzeuge vermittelt seit 2012."
+  },
+  "nav": {
+    "vehicles": "Fahrzeuge",
+    "workshop": "Werkstatt",
+    "contact": "Kontakt",
+    "callUs": "Rufen Sie uns an"
+  },
+  "hero": {
+    "subtitle": "Sportwagen & Klassiker seit 2012 in Freiburg",
+    "titleLine1": "Handverlesene Sportwagen.",
+    "titleLine2": "Persönlich vermittelt.",
+    "cta": "Fahrzeuge ansehen",
+    "ctaSecondary": "Besichtigung vereinbaren"
+  },
+  "featured": {
+    "label": "Ausgewählte Fahrzeuge",
+    "title": "Die aktuelle Kollektion",
+    "description": "Handverlesene Sportwagen und Klassiker — jedes Fahrzeug geprüft, jede Historie lückenlos.",
+    "viewAll": "Alle Fahrzeuge ansehen",
+    "from": "ab",
+    "ps": "PS",
+    "km": "km"
+  },
+  "services": {
+    "label": "Leistungen",
+    "title": "Kaufen. Pflegen. Bewahren.",
+    "buy": {
+      "title": "Ihr nächstes Fahrzeug",
+      "description": "Geprüfte Sportwagen mit lückenloser Historie. Persönlich ausgewählt, diskret vermittelt."
+    },
+    "workshop": {
+      "title": "Meister-Werkstatt",
+      "description": "Wartung, Reparatur und Restaurierung — mit Originalteilen und zertifizierten Verfahren."
+    },
+    "detailing": {
+      "title": "Aufbereitung",
+      "description": "Lackkorrektur, Keramikversiegelung und Interieurpflege bis ins Detail."
+    },
+    "learnMore": "Mehr erfahren"
+  },
+  "promise": {
+    "label": "Unser Versprechen",
+    "title": "Geprüft, bevor Sie es sehen.",
+    "text": "Jedes Fahrzeug durchläuft eine umfassende technische Prüfung, bevor es in unsere Ausstellung kommt. Werksseitige Revisionen, lückenlose Dokumentation, persönliche Inspektion durch unser Team — nur was unseren Standards standhält, wird angeboten.",
+    "stats": {
+      "passion": { "value": "142", "label": "Prüfpunkte pro Fahrzeug" },
+      "available": { "value": "100%", "label": "Dokumentierte Historie" },
+      "transparency": { "value": "48h", "label": "Antwort auf Ihre Anfrage" },
+      "experience": { "value": "14+", "label": "Jahre in Freiburg" }
+    }
+  },
+  "heritage": {
+    "label": "Seit 2012",
+    "title": "Von Jérôme Gay gegründet.",
+    "milestones": {
+      "2026": { "title": "Neuer Standort Engesserstraße", "text": "Mehr Platz. Mehr Auswahl. Umzug in die neue Ausstellungshalle in Freiburg." },
+      "2022": { "title": "900+ Fahrzeuge vermittelt", "text": "An Sammler und Enthusiasten in ganz Europa." },
+      "2015": { "title": "Meister-Werkstatt eröffnet", "text": "Eigene Werkstatt mit zertifizierten Sportwagen-Spezialisten." },
+      "2013": { "title": "Ausstellungshalle Freiburg", "text": "Einzug in den heutigen Standort an der Engesserstraße." },
+      "2012": { "title": "Gründung", "text": "Jérôme Gay gründet Prestige in Freiburg — aus Leidenschaft für automobile Exzellenz." }
+    }
+  },
+  "contact": {
+    "label": "Kontakt",
+    "title": "Lassen Sie uns sprechen",
+    "description": "Besuchen Sie unsere Ausstellung in Freiburg oder kontaktieren Sie uns — unverbindlich und diskret.",
+    "address": "Engesserstraße 1, 79108 Freiburg",
+    "phone": "+49 761 5573168",
+    "email": "info@prestige-selections.com",
+    "cta": "Besichtigung vereinbaren",
+    "ctaWhatsApp": "WhatsApp schreiben",
+    "form": {
+      "name": "Ihr Name",
+      "email": "Ihre E-Mail",
+      "phone": "Telefon (optional)",
+      "message": "Ihre Nachricht",
+      "vehicle": "Fahrzeug von Interesse (optional)",
+      "addressLabel": "Adresse",
+      "phoneLabel": "Telefon",
+      "emailLabel": "E-Mail",
+      "submit": "Nachricht senden",
+      "success": "Vielen Dank! Wir melden uns zeitnah bei Ihnen.",
+      "privacy": "Mit dem Absenden stimmen Sie unserer <link>Datenschutzerklärung</link> zu."
+    }
+  },
+  "vehicles": {
+    "title": "Alle Fahrzeuge",
+    "description": "Entdecken Sie unsere aktuelle Auswahl an Sportwagen und Klassikern.",
+    "filterAll": "Alle",
+    "sort": "Sortieren",
+    "sortPrice": "Preis",
+    "sortYear": "Baujahr",
+    "sortMileage": "Kilometerstand",
+    "details": "Details ansehen",
+    "mileage": "Kilometerstand",
+    "power": "Leistung",
+    "fuel": "Kraftstoff",
+    "transmission": "Getriebe",
+    "firstReg": "Erstzulassung",
+    "price": "Preis",
+    "vatIncluded": "inkl. {rate}% MwSt.",
+    "vatNotApplicable": "MwSt. nicht ausweisbar",
+    "petrol": "Benzin",
+    "hybrid": "Hybrid",
+    "automatic": "Automatik",
+    "manual": "Schaltgetriebe",
+    "inquire": "Unverbindlich anfragen",
+    "count": "{count} Fahrzeuge"
+  },
+  "workshop": {
+    "title": "Meister-Werkstatt",
+    "subtitle": "Spezialisiert auf das Außergewöhnliche",
+    "description": "Unsere Sportwagen-Werkstatt hat sich auf Sportwagen & Klassiker spezialisiert. Marken wie Ferrari, Porsche, Lamborghini, Aston Martin, Bentley, Maserati und viele weitere sind bei uns in besten Händen.",
+    "services": {
+      "maintenance": { "title": "Wartung & Inspektion", "text": "Herstellerkonforme Wartung für alle Sportwagen-Marken." },
+      "repair": { "title": "Reparatur", "text": "Fachgerechte Reparaturen mit Originalteilen." },
+      "restoration": { "title": "Klassiker-Betreuung", "text": "Liebevolle Pflege und Instandsetzung automobiler Klassiker." },
+      "detailing": { "title": "Aufbereitung", "text": "Professionelle Fahrzeugpflege auf höchstem Niveau." }
+    },
+    "cta": "Termin vereinbaren",
+    "brands": "Marken, denen wir vertrauen — und die uns vertrauen",
+    "detail": {
+      "maintenance": {
+        "title": "Wartung & Inspektion",
+        "subtitle": "Herstellerkonforme Wartung",
+        "description": "Regelmäßige Wartung ist der beste Schutz für Ihren Sportwagen. Unsere Meister-Werkstatt führt alle Inspektionen gemäß Herstellervorgaben durch — mit Originalteilen, zertifizierten Verfahren und der Sorgfalt, die Fahrzeuge dieser Klasse verdienen.",
+        "features": "Digitale Servicehistorie, Originalteile aller Hersteller, Hol- und Bringservice in Freiburg und Umgebung, Leihfahrzeug auf Anfrage"
+      },
+      "repair": {
+        "title": "Reparatur",
+        "subtitle": "Fachgerechte Instandsetzung",
+        "description": "Von der Diagnose bis zur Reparatur — unser Team arbeitet mit modernen Diagnosegeräten und Originalteilen. Ob Getriebe, Fahrwerk oder Elektronik: Wir kennen die Besonderheiten jeder Marke und reparieren so, dass Sie den Unterschied nicht merken — außer dass alles wieder perfekt funktioniert.",
+        "features": "Markenspezifische Diagnosegeräte, Originalersatzteile, Transparente Kostenvoranschläge, Dokumentierte Reparaturhistorie"
+      },
+      "klassiker": {
+        "title": "Klassiker-Betreuung",
+        "subtitle": "Liebevolle Pflege automobiler Geschichte",
+        "description": "Klassische Sportwagen brauchen besondere Aufmerksamkeit. Unsere Spezialisten verstehen die Mechanik, die Materialien und die Philosophie hinter jedem Klassiker. Wir betreuen Ihr Fahrzeug langfristig — von der saisonalen Einlagerung bis zur vollständigen Restaurierung.",
+        "features": "Klimatisierte Einlagerung, Regelmäßige Bewegungsfahrten, Restaurierungsplanung, Werterhaltende Pflege"
+      },
+      "aufbereitung": {
+        "title": "Fahrzeugaufbereitung",
+        "subtitle": "Professionelle Pflege auf höchstem Niveau",
+        "description": "Eine professionelle Aufbereitung bringt den Glanz Ihres Fahrzeugs zurück — und schützt ihn für die Zukunft. Wir arbeiten mit den besten Produkten und Techniken: Lackkorrektur, Keramikversiegelung, Leder- und Interieurpflege bis ins kleinste Detail.",
+        "features": "Mehrstufige Lackkorrektur, Keramikversiegelung, Leder- und Alcantara-Pflege, Motor- und Unterbodenwäsche"
+      }
+    }
+  },
+  "footer": {
+    "tagline": "Sportwagen & Klassiker seit 2012",
+    "navigation": "Navigation",
+    "legal": "Rechtliches",
+    "impressum": "Impressum",
+    "datenschutz": "Datenschutz",
+    "rights": "Alle Rechte vorbehalten.",
+    "address": "Engesserstraße 1, 79108 Freiburg"
+  },
+  "cookie": {
+    "title": "Ihre Privatsphäre",
+    "text": "Wir verwenden Cookies, um Ihnen die bestmögliche Erfahrung zu bieten. Sie können wählen, welche Cookies Sie zulassen möchten.",
+    "acceptAll": "Alle akzeptieren",
+    "rejectAll": "Nur notwendige",
+    "customize": "Anpassen",
+    "necessary": "Notwendig",
+    "necessaryDesc": "Erforderlich für die Grundfunktionen der Website.",
+    "analytics": "Analyse",
+    "analyticsDesc": "Helfen uns zu verstehen, wie Besucher die Website nutzen.",
+    "marketing": "Marketing",
+    "marketingDesc": "Werden verwendet, um relevante Werbung anzuzeigen.",
+    "save": "Auswahl speichern",
+    "privacyLink": "Datenschutzerklärung"
+  },
+  "vehicleDetail": {
+    "back": "Zurück zur Übersicht",
+    "inquire": "Unverbindlich anfragen",
+    "call": "Oder direkt anrufen",
+    "specs": "Technische Daten",
+    "power": "Leistung",
+    "mileage": "Kilometerstand",
+    "fuel": "Kraftstoff",
+    "transmission": "Getriebe",
+    "firstReg": "Erstzulassung",
+    "price": "Preis",
+    "highlights": "Highlights",
+    "petrol": "Benzin",
+    "hybrid": "Hybrid",
+    "automatic": "Automatik",
+    "manual": "Schaltgetriebe",
+    "vatIncluded": "inkl. {rate}% MwSt.",
+    "vatNotApplicable": "MwSt. nicht ausweisbar",
+    "newVehicle": "Neuwagen",
+    "contactTitle": "Interesse an diesem Fahrzeug?",
+    "contactText": "Kontaktieren Sie uns für eine unverbindliche Beratung, eine Probefahrt oder weitere Informationen zu diesem Fahrzeug.",
+    "moreVehicles": "Weitere Fahrzeuge entdecken",
+    "notFound": "Fahrzeug nicht gefunden",
+    "notFoundText": "Das gesuchte Fahrzeug ist leider nicht mehr verfügbar.",
+    "backToAll": "Alle Fahrzeuge ansehen"
+  },
+  "proofBar": {
+    "vehicles": "Fahrzeuge vermittelt",
+    "since": "Gegründet",
+    "specialists": "Werkstatt-Spezialisten",
+    "brands": "Premium-Marken"
+  },
+  "faq": {
+    "label": "Häufige Fragen",
+    "title": "Das werden wir oft gefragt",
+    "items": {
+      "q1": {
+        "question": "Welche Marken führt Prestige Selections?",
+        "answer": "Wir sind spezialisiert auf Ferrari, Porsche, Lamborghini, Bentley, Rolls-Royce, Aston Martin und Maserati. Unser Bestand umfasst sowohl aktuelle Modelle als auch ausgewählte Klassiker dieser Marken."
+      },
+      "q2": {
+        "question": "Kann ich ein Fahrzeug vor dem Kauf besichtigen?",
+        "answer": "Selbstverständlich. Vereinbaren Sie einen persönlichen Termin in unserer Ausstellung in Freiburg. Wir nehmen uns Zeit für eine ausführliche Besichtigung und beantworten alle Ihre Fragen — diskret und unverbindlich."
+      },
+      "q3": {
+        "question": "Bietet Prestige Selections eine Werkstatt für Sportwagen?",
+        "answer": "Ja. Unsere Meister-Werkstatt mit 5 Fachkräften ist spezialisiert auf Wartung, Reparatur und Aufbereitung von Sportwagen und Klassikern. Wir arbeiten mit Originalteilen und herstellerkonformen Verfahren."
+      },
+      "q4": {
+        "question": "Wie läuft der Kaufprozess ab?",
+        "answer": "Nach der Besichtigung erstellen wir ein individuelles Angebot. Jedes Fahrzeug durchläuft vor dem Verkauf eine umfassende technische Prüfung. Wir unterstützen Sie bei Zulassung, Versicherung und bei Bedarf auch bei der Finanzierung."
+      },
+      "q5": {
+        "question": "Liefert Prestige Selections Fahrzeuge auch deutschlandweit?",
+        "answer": "Ja, wir liefern deutschlandweit und auf Wunsch auch europaweit. Viele unserer Kunden kaufen nach einer persönlichen Beratung per Telefon oder Video und erhalten ihr Fahrzeug direkt nach Hause geliefert."
+      }
+    }
+  },
+  "notFound": {
+    "title": "Seite nicht gefunden",
+    "text": "Die gesuchte Seite existiert nicht oder wurde verschoben.",
+    "cta": "Zur Startseite"
+  },
+  "impressum": {
+    "title": "Impressum"
+  },
+  "datenschutz": {
+    "title": "Datenschutzerklärung"
+  }
+}

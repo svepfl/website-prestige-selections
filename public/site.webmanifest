@@ -1,0 +1,16 @@
+{
+  "name": "Prestige Selections",
+  "short_name": "Prestige",
+  "description": "Luxury sports car and classic car dealer in Freiburg",
+  "start_url": "/de",
+  "display": "standalone",
+  "background_color": "#0C0A09",
+  "theme_color": "#0C0A09",
+  "icons": [
+    {
+      "src": "/favicon.ico",
+      "sizes": "32x32",
+      "type": "image/x-icon"
+    }
+  ]
+}

@@ -6,7 +6,18 @@
       "Bash(npx create-next-app@latest . --typescript --tailwind --eslint --app --src-dir --import-alias \"@/*\" --use-npm --no-turbopack 2)",
       "Bash(1:*)",
       "Bash(npx create-next-app@latest . --typescript --tailwind --eslint --app --src-dir --import-alias \"@/*\" --use-npm --no-turbopack)",
-      "Bash(yes \"\")"
+      "Bash(yes \"\")",
+      "Skill(seo-audit)",
+      "Skill(seo-audit:*)",
+      "Skill(seo-hreflang)",
+      "Skill(seo-hreflang:*)",
+      "WebFetch(domain:raw.githubusercontent.com)"
+    ],
+    "additionalDirectories": [
+      "/Users/svenpfluger/CodeProjects/website-autogalerie-freiburg/src/app/[locale]/fahrzeuge",
+      "/Users/svenpfluger/CodeProjects/website-prestige-freiburg/src/app/[locale]/kontakt",
+      "/Users/svenpfluger/CodeProjects/website-prestige-freiburg/src/app/[locale]/fahrzeuge",
+      "/Users/svenpfluger/CodeProjects/website-prestige-freiburg/src/app/[locale]/werkstatt"
     ]
   }
 }

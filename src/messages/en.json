@@ -1,0 +1,246 @@
+{
+  "meta": {
+    "title": "Prestige Selections Freiburg — Sports Cars & Classics",
+    "description": "Sports car and classic car dealer in Freiburg, Germany. Ferrari, Porsche, Lamborghini, Bentley, Rolls-Royce, Aston Martin. Over 900 vehicles sold since 2012."
+  },
+  "nav": {
+    "vehicles": "Vehicles",
+    "workshop": "Workshop",
+    "contact": "Contact",
+    "callUs": "Call us"
+  },
+  "hero": {
+    "subtitle": "Sports Cars & Classics since 2012 in Freiburg",
+    "titleLine1": "Hand-picked sports cars.",
+    "titleLine2": "Personally delivered.",
+    "cta": "View vehicles",
+    "ctaSecondary": "Book a viewing"
+  },
+  "featured": {
+    "label": "Featured Vehicles",
+    "title": "The Current Collection",
+    "description": "Hand-selected sports cars and classics — every vehicle inspected, every provenance verified.",
+    "viewAll": "View all vehicles",
+    "from": "from",
+    "ps": "bhp",
+    "km": "km"
+  },
+  "services": {
+    "label": "Services",
+    "title": "Buy. Maintain. Preserve.",
+    "buy": {
+      "title": "Your next vehicle",
+      "description": "Inspected sports cars with verified provenance. Personally selected, discreetly delivered."
+    },
+    "workshop": {
+      "title": "Master Workshop",
+      "description": "Maintenance, repair and restoration — with genuine parts and certified procedures."
+    },
+    "detailing": {
+      "title": "Detailing",
+      "description": "Paint correction, ceramic coating and interior care down to the last detail."
+    },
+    "learnMore": "Learn more"
+  },
+  "promise": {
+    "label": "Our Promise",
+    "title": "Inspected before you see it.",
+    "text": "Every vehicle undergoes a comprehensive technical inspection before entering our showroom. Factory-standard revisions, complete documentation, personal review by our team — only what meets our standards is offered.",
+    "stats": {
+      "passion": { "value": "142", "label": "Inspection points per vehicle" },
+      "available": { "value": "100%", "label": "Documented provenance" },
+      "transparency": { "value": "48h", "label": "Response to your enquiry" },
+      "experience": { "value": "14+", "label": "Years in Freiburg" }
+    }
+  },
+  "heritage": {
+    "label": "Since 2012",
+    "title": "Founded by Jérôme Gay.",
+    "milestones": {
+      "2026": { "title": "New showroom on Engesserstraße", "text": "More space. More selection. Moving into our new exhibition hall in Freiburg." },
+      "2022": { "title": "900+ vehicles delivered", "text": "To collectors and enthusiasts across Europe." },
+      "2015": { "title": "Master workshop opened", "text": "In-house workshop with certified sports car specialists." },
+      "2013": { "title": "Freiburg showroom", "text": "Moving into our current location on Engesserstraße." },
+      "2012": { "title": "Founded", "text": "Jérôme Gay founds Prestige in Freiburg — driven by a passion for automotive excellence." }
+    }
+  },
+  "contact": {
+    "label": "Contact",
+    "title": "Let us talk",
+    "description": "Visit our showroom in Freiburg or reach out to us — no obligation, complete discretion.",
+    "address": "Engesserstraße 1, 79108 Freiburg",
+    "phone": "+49 761 5573168",
+    "email": "info@prestige-selections.com",
+    "cta": "Book a viewing",
+    "ctaWhatsApp": "Message on WhatsApp",
+    "form": {
+      "name": "Your name",
+      "email": "Your email",
+      "phone": "Phone (optional)",
+      "message": "Your message",
+      "vehicle": "Vehicle of interest (optional)",
+      "addressLabel": "Address",
+      "phoneLabel": "Phone",
+      "emailLabel": "Email",
+      "submit": "Send message",
+      "success": "Thank you. We shall be in touch shortly.",
+      "privacy": "By submitting, you agree to our <link>privacy policy</link>."
+    }
+  },
+  "vehicles": {
+    "title": "All Vehicles",
+    "description": "Discover our current selection of sports cars and classics.",
+    "filterAll": "All",
+    "sort": "Sort",
+    "sortPrice": "Price",
+    "sortYear": "Year",
+    "sortMileage": "Mileage",
+    "details": "View details",
+    "mileage": "Mileage",
+    "power": "Power",
+    "fuel": "Fuel",
+    "transmission": "Transmission",
+    "firstReg": "First registration",
+    "price": "Price",
+    "vatIncluded": "incl. {rate}% VAT",
+    "vatNotApplicable": "VAT not applicable",
+    "petrol": "Petrol",
+    "hybrid": "Hybrid",
+    "automatic": "Automatic",
+    "manual": "Manual",
+    "inquire": "Enquire without obligation",
+    "count": "{count} vehicles"
+  },
+  "workshop": {
+    "title": "Master Workshop",
+    "subtitle": "Specialised in the extraordinary",
+    "description": "Our workshop is dedicated to sports cars and classics. Marques such as Ferrari, Porsche, Lamborghini, Aston Martin, Bentley, Maserati and many more are in the finest hands with us.",
+    "services": {
+      "maintenance": { "title": "Maintenance & inspection", "text": "Manufacturer-standard servicing for all sports car marques." },
+      "repair": { "title": "Repair", "text": "Expert repairs using genuine parts." },
+      "restoration": { "title": "Classic car care", "text": "Devoted care and restoration of automotive classics." },
+      "detailing": { "title": "Detailing", "text": "Professional vehicle care at the highest level." }
+    },
+    "cta": "Book an appointment",
+    "brands": "Marques we trust — and who trust us",
+    "detail": {
+      "maintenance": {
+        "title": "Maintenance & Inspection",
+        "subtitle": "Manufacturer-standard servicing",
+        "description": "Regular maintenance is the best protection for your sports car. Our master-certified workshop carries out all inspections according to manufacturer specifications — with genuine parts, certified procedures, and the care that vehicles of this class deserve.",
+        "features": "Digital service history, Genuine parts from all manufacturers, Collection and delivery in Freiburg and surrounding areas, Courtesy vehicle on request"
+      },
+      "repair": {
+        "title": "Repair",
+        "subtitle": "Expert restoration to factory standard",
+        "description": "From diagnosis to repair — our team works with modern diagnostic equipment and genuine parts. Whether gearbox, suspension, or electronics: we understand the specifics of every marque and repair so precisely that you will not notice the difference — except that everything works perfectly again.",
+        "features": "Brand-specific diagnostic equipment, Genuine replacement parts, Transparent cost estimates, Documented repair history"
+      },
+      "klassiker": {
+        "title": "Classic Car Care",
+        "subtitle": "Devoted stewardship of automotive history",
+        "description": "Classic sports cars require special attention. Our specialists understand the mechanics, materials, and philosophy behind every classic. We care for your vehicle long-term — from seasonal storage to complete restoration.",
+        "features": "Climate-controlled storage, Regular exercise drives, Restoration planning, Value-preserving care"
+      },
+      "aufbereitung": {
+        "title": "Detailing",
+        "subtitle": "Professional care at the highest level",
+        "description": "Professional detailing restores your vehicle's brilliance — and protects it for the future. We work with the finest products and techniques: paint correction, ceramic coating, leather and interior care down to the smallest detail.",
+        "features": "Multi-stage paint correction, Ceramic coating, Leather and Alcantara care, Engine and underbody cleaning"
+      }
+    }
+  },
+  "footer": {
+    "tagline": "Sports Cars & Classics since 2012",
+    "navigation": "Navigation",
+    "legal": "Legal",
+    "impressum": "Legal Notice",
+    "datenschutz": "Privacy Policy",
+    "rights": "All rights reserved.",
+    "address": "Engesserstraße 1, 79108 Freiburg"
+  },
+  "cookie": {
+    "title": "Your Privacy",
+    "text": "We use cookies to provide you with the best possible experience. You may choose which cookies you wish to allow.",
+    "acceptAll": "Accept all",
+    "rejectAll": "Essentials only",
+    "customize": "Customise",
+    "necessary": "Essential",
+    "necessaryDesc": "Required for the basic functionality of the website.",
+    "analytics": "Analytics",
+    "analyticsDesc": "Help us understand how visitors use the website.",
+    "marketing": "Marketing",
+    "marketingDesc": "Used to display relevant advertising.",
+    "save": "Save preferences",
+    "privacyLink": "Privacy policy"
+  },
+  "vehicleDetail": {
+    "back": "Back to all vehicles",
+    "inquire": "Enquire without obligation",
+    "call": "Or call us directly",
+    "specs": "Specifications",
+    "power": "Power",
+    "mileage": "Mileage",
+    "fuel": "Fuel",
+    "transmission": "Transmission",
+    "firstReg": "First registration",
+    "price": "Price",
+    "highlights": "Highlights",
+    "petrol": "Petrol",
+    "hybrid": "Hybrid",
+    "automatic": "Automatic",
+    "manual": "Manual",
+    "vatIncluded": "incl. {rate}% VAT",
+    "vatNotApplicable": "VAT not applicable",
+    "newVehicle": "New vehicle",
+    "contactTitle": "Interested in this vehicle?",
+    "contactText": "Contact us for a no-obligation consultation, a test drive, or further information about this vehicle.",
+    "moreVehicles": "Explore more vehicles",
+    "notFound": "Vehicle not found",
+    "notFoundText": "The vehicle you are looking for is no longer available.",
+    "backToAll": "View all vehicles"
+  },
+  "proofBar": {
+    "vehicles": "Vehicles sold",
+    "since": "Founded",
+    "specialists": "Workshop specialists",
+    "brands": "Premium brands"
+  },
+  "faq": {
+    "label": "Frequently Asked",
+    "title": "Common questions, answered",
+    "items": {
+      "q1": {
+        "question": "Which brands does Prestige Selections carry?",
+        "answer": "We specialise in Ferrari, Porsche, Lamborghini, Bentley, Rolls-Royce, Aston Martin, and Maserati. Our inventory includes both current models and selected classics from these marques."
+      },
+      "q2": {
+        "question": "Can I view a vehicle before purchasing?",
+        "answer": "Of course. Schedule a personal appointment at our showroom in Freiburg. We take the time for a thorough viewing and answer all your questions — discreetly and without obligation."
+      },
+      "q3": {
+        "question": "Does Prestige Selections offer a workshop for sports cars?",
+        "answer": "Yes. Our master-certified workshop with 5 specialists focuses on maintenance, repair, and detailing for sports cars and classics. We use genuine parts and manufacturer-standard procedures."
+      },
+      "q4": {
+        "question": "What does the buying process look like?",
+        "answer": "After viewing, we prepare an individual offer. Every vehicle undergoes a comprehensive technical inspection before sale. We assist with registration, insurance, and financing if needed."
+      },
+      "q5": {
+        "question": "Does Prestige Selections deliver vehicles nationwide?",
+        "answer": "Yes, we deliver throughout Germany and Europe on request. Many of our clients purchase after a personal consultation by phone or video and receive their vehicle delivered to their door."
+      }
+    }
+  },
+  "notFound": {
+    "title": "Page not found",
+    "text": "The page you are looking for does not exist or has been moved.",
+    "cta": "Back to homepage"
+  },
+  "impressum": {
+    "title": "Legal Notice"
+  },
+  "datenschutz": {
+    "title": "Privacy Policy"
+  }
+}
