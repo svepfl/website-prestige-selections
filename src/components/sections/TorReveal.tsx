@@ -124,43 +124,13 @@ export default function TorReveal() {
       lastDrawnIndex = index;
     };
 
-    // Load frame 0 first. onload BEFORE src to catch cached images.
-    const onFirstReady = (img: HTMLImageElement) => {
-      if (cancelled) return;
-      frames[0] = img;
-      setCanvasSize();
-      drawFrame(0);
-      setFirstFrameReady(true);
-    };
-    const first = new window.Image();
-    first.fetchPriority = 'high';
-    first.decoding = 'sync';
-    first.onload = () => onFirstReady(first);
-    first.src = framePath(0);
-    if (first.complete && first.naturalWidth > 0) onFirstReady(first);
-
-    for (let i = 1; i < FRAME_COUNT; i++) {
-      const img = new window.Image();
-      img.decoding = 'async';
-      const store = () => {
-        if (cancelled) return;
-        frames[i] = img;
-      };
-      img.onload = store;
-      img.src = framePath(i);
-      if (img.complete && img.naturalWidth > 0) store();
-    }
-
     // ────────────────────────────────────────────────────────────────
     // SCROLL-SCRUBBED VIDEO + TEXT FADES
     // ────────────────────────────────────────────────────────────────
-    // Video-Frames sind direkt an Scroll-Position gekoppelt: Tor öffnet
-    // sich proportional zum Scrollen. Section ist kurz (h-[130vh]) — sobald
-    // Tor vollständig offen / Cars sichtbar (= Frame 60 erreicht), endet
-    // auch die Section. Kein "wait period" nach Video-Ende.
     let ticking = false;
     let inView = true;
     let previousProgress = 0;
+    let loadedCount = 0;
 
     const update = () => {
       ticking = false;
@@ -227,6 +197,44 @@ export default function TorReveal() {
       setCanvasSize();
       if (lastDrawnIndex >= 0) drawFrame(lastDrawnIndex);
     };
+
+    // ─── Image preload ────────────────────────────────────────────────
+    // Now that drawFrame + update are defined, kick off frame loading.
+    // First frame: priority + sync decode so the canvas paints fast.
+    // Subsequent frames: async, with the first ~12 marked high-priority
+    // so the opening of the scroll feels smooth even on cold cache.
+    // Each frame's onload triggers update() so the canvas catches up to
+    // the current scroll position as soon as the target frame arrives.
+    const onFirstReady = (img: HTMLImageElement) => {
+      if (cancelled) return;
+      frames[0] = img;
+      loadedCount++;
+      setCanvasSize();
+      drawFrame(0);
+      setFirstFrameReady(true);
+    };
+    const first = new window.Image();
+    first.fetchPriority = 'high';
+    first.decoding = 'sync';
+    first.onload = () => onFirstReady(first);
+    first.src = framePath(0);
+    if (first.complete && first.naturalWidth > 0) onFirstReady(first);
+
+    for (let i = 1; i < FRAME_COUNT; i++) {
+      const img = new window.Image();
+      img.decoding = 'async';
+      if (i < 12) img.fetchPriority = 'high';
+      const idx = i;
+      const store = () => {
+        if (cancelled || frames[idx]) return;
+        frames[idx] = img;
+        loadedCount++;
+        update();
+      };
+      img.onload = store;
+      img.src = framePath(i);
+      if (img.complete && img.naturalWidth > 0) store();
+    }
 
     const io = new IntersectionObserver(
       (entries) => {

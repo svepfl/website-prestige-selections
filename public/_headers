@@ -1,0 +1,12 @@
+# Cloudflare Workers Assets — custom cache headers
+# Frames + atmospheric assets never change content; treat them immutable so
+# returning visitors hit the browser cache + CF edge instantly.
+
+/assets/videos/*
+  Cache-Control: public, max-age=31536000, immutable
+
+/assets/*.webp
+  Cache-Control: public, max-age=2592000
+
+/assets/*
+  Cache-Control: public, max-age=2592000
