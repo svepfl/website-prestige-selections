@@ -1,5 +1,10 @@
 import type { NextConfig } from "next";
 import createNextIntlPlugin from "next-intl/plugin";
+import { initOpenNextCloudflareForDev } from "@opennextjs/cloudflare";
+
+// Mocks Cloudflare bindings (Assets, KV, R2) during `next dev` so server code
+// that uses `getCloudflareContext()` keeps working locally. No-op in prod.
+initOpenNextCloudflareForDev();
 
 const withNextIntl = createNextIntlPlugin("./src/i18n/request.ts");
 
