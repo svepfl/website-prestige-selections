@@ -1,159 +1,196 @@
+import type { Metadata } from 'next';
 import { useTranslations } from 'next-intl';
+import { getTranslations } from 'next-intl/server';
+import { jsonLd } from '@/lib/json-ld';
+import Breadcrumbs from '@/components/Breadcrumbs';
 
-export default function ImpressumPage() {
+const BASE_URL = 'https://www.prestige-selections.com';
+const locales = ['de', 'en', 'fr'] as const;
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+  const { locale } = await params;
+  const safeLocale = (locales as readonly string[]).includes(locale) ? locale : 'de';
+  const t = await getTranslations({ locale: safeLocale, namespace: 'impressum' });
+  const url = `${BASE_URL}/${safeLocale}/impressum`;
+  return {
+    title: t('title'),
+    description: `${t('title')} — Sven Pflüger, Schusterstraße 40, 79098 Freiburg.`,
+    alternates: {
+      canonical: url,
+      languages: Object.fromEntries(locales.map((l) => [l, `${BASE_URL}/${l}/impressum`])),
+    },
+    robots: { index: true, follow: true },
+  };
+}
+
+export default async function ImpressumPage({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}) {
+  const { locale } = await params;
+  const safeLocale = (locales as readonly string[]).includes(locale) ? locale : 'de';
+  return <ImpressumContent locale={safeLocale} />;
+}
+
+function ImpressumContent({ locale }: { locale: string }) {
   const t = useTranslations('impressum');
+  const isNonBinding = locale !== 'de';
+
+  const schema = {
+    '@context': 'https://schema.org',
+    '@type': 'WebPage',
+    name: t('title'),
+    description: `${t('title')} — Sven Pflüger, Freiburg.`,
+    url: `${BASE_URL}/${locale}/impressum`,
+    inLanguage: locale,
+    isPartOf: { '@id': `${BASE_URL}/#website` },
+    about: { '@id': `${BASE_URL}/#dealer` },
+  };
+
+  const breadcrumbSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: t('title'), item: `${BASE_URL}/${locale}/impressum` },
+    ],
+  };
 
   return (
-    <section className="bg-dark pt-32 pb-24 md:pb-32">
-      <div className="max-w-3xl mx-auto px-6">
-        <h1 className="text-3xl md:text-5xl font-light text-white tracking-tight mb-12">
+    <main className="bg-canvas text-ink pt-32 pb-24 md:pb-32">
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: jsonLd(schema) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: jsonLd(breadcrumbSchema) }} />
+
+      <div className="px-6 md:px-10 lg:px-14">
+        <div className="mx-auto max-w-[920px]">
+          <Breadcrumbs locale={locale} items={[{ label: t('title') }]} />
+        </div>
+      </div>
+
+      <div className="max-w-[920px] mx-auto px-6 md:px-10 lg:px-14">
+        <p className="font-mono-spec text-[10px] uppercase tracking-[0.32em] text-gold-deep mb-6">
+          {t('label')}
+        </p>
+        <h1
+          className="font-sans text-ink leading-[0.95] tracking-[-0.03em] uppercase mb-12"
+          style={{ fontWeight: 700, fontSize: 'clamp(2rem, 5vw, 4rem)' }}
+        >
           {t('title')}
         </h1>
 
-        <div className="prose-invert space-y-10 text-neutral-300 text-sm leading-relaxed">
-          {/* Angaben gemäß § 5 TMG */}
-          <div>
-            <h2 className="text-lg font-light text-white mb-4">
-              Angaben gem&auml;&szlig; &sect; 5 TMG
+        {isNonBinding && (
+          <p className="mb-12 font-mono-spec text-[11px] uppercase tracking-[0.24em] text-ink-muted border-l-2 border-gold-deep/40 pl-5 py-1 leading-[1.7]">
+            {t('bindingNotice')}
+          </p>
+        )}
+
+        <div className="space-y-12 text-ink-soft text-[15px] leading-[1.7]">
+          {/* § 5 DDG — Diensteanbieter */}
+          <section>
+            <h2 className="font-sans text-ink uppercase tracking-[-0.015em] mb-4" style={{ fontWeight: 700 }}>
+              {t('tmgHeading')}
             </h2>
-            <p>
-              Prestige GmbH<br />
-              Engesserstra&szlig;e 1<br />
-              79108 Freiburg
+            <address className="not-italic">
+              {t('companyName')}<br />
+              {t('companyAddress1')}<br />
+              {t('companyAddress2')}<br />
+              {t('companyCountry')}
+            </address>
+            <p className="mt-4 font-mono-spec text-[13px]">
+              {t('phoneLabel')}: <a href="tel:+491764145810" className="hover:text-gold-deep transition-colors duration-300">+49 176 4145 0810</a><br />
+              {t('emailLabel')}: <a href="mailto:hallo@systembuero.com" className="hover:text-gold-deep transition-colors duration-300">hallo@systembuero.com</a><br />
+              {t('webLabel')}: www.prestige-selections.com
             </p>
-            <p className="mt-4">
-              Telefon: +49 761 5573168<br />
-              E-Mail: info@prestige-selections.com<br />
-              Web: www.prestige-selections.com
-            </p>
-          </div>
-
-          {/* Handelsregister */}
-          <div>
-            <h2 className="text-lg font-light text-white mb-4">Handelsregister</h2>
-            <p>
-              Registergericht: Amtsgericht Freiburg im Breisgau<br />
-              Registernummer: HRB 708798
-            </p>
-          </div>
-
-          {/* Geschäftsführer */}
-          <div>
-            <h2 className="text-lg font-light text-white mb-4">
-              Gesch&auml;ftsf&uuml;hrer
-            </h2>
-            <p>J&eacute;r&ocirc;me Gay</p>
-          </div>
-
-          {/* Umsatzsteuer */}
-          <div>
-            <h2 className="text-lg font-light text-white mb-4">Umsatzsteuer-ID</h2>
-            <p>
-              Umsatzsteuer-Identifikationsnummer gem&auml;&szlig; &sect; 27a
-              Umsatzsteuergesetz:<br />
-              DE285102565
-            </p>
-          </div>
+          </section>
 
           {/* Inhaltlich Verantwortlich */}
-          <div>
-            <h2 className="text-lg font-light text-white mb-4">
-              Inhaltlich Verantwortlicher gem&auml;&szlig; &sect; 55 Abs. 2 RSt&apos;V
+          <section>
+            <h2 className="font-sans text-ink uppercase tracking-[-0.015em] mb-4" style={{ fontWeight: 700 }}>
+              {t('responsibleHeading')}
             </h2>
             <p>
-              J&eacute;r&ocirc;me Gay<br />
-              Engesserstra&szlig;e 1<br />
-              79108 Freiburg
+              {t('companyName')}<br />
+              {t('companyAddress1')}<br />
+              {t('companyAddress2')}
             </p>
-          </div>
+          </section>
+
+          {/* EU-Streitschlichtung — Pflicht für Online-Anbieter mit Verbraucherbezug */}
+          <section>
+            <h2 className="font-sans text-ink uppercase tracking-[-0.015em] mb-4" style={{ fontWeight: 700 }}>
+              {t('disputeHeading')}
+            </h2>
+            <p>
+              {t('disputeBody')}{' '}
+              <a
+                href="https://ec.europa.eu/consumers/odr"
+                target="_blank"
+                rel="noreferrer noopener"
+                className="underline hover:text-gold-deep transition-colors duration-300"
+              >
+                ec.europa.eu/consumers/odr
+              </a>
+              . {t('disputeBodyTail')}
+            </p>
+          </section>
 
           {/* Haftungsausschluss */}
-          <div>
-            <h2 className="text-xl font-light text-white mb-6">Haftungsausschluss</h2>
+          <section>
+            <h2 className="font-sans text-ink uppercase tracking-[-0.02em] mb-8" style={{ fontWeight: 700, fontSize: '1.25rem' }}>
+              {t('liabilityHeading')}
+            </h2>
 
-            <h3 className="text-base font-light text-white mb-3">1. Inhalt des Onlineangebots</h3>
-            <p className="mb-6">
-              Die Prestige GmbH &uuml;bernimmt keinerlei Gew&auml;hr f&uuml;r die
-              Aktualit&auml;t, Korrektheit, Vollst&auml;ndigkeit oder Qualit&auml;t der
-              bereitgestellten Informationen. Haftungsanspr&uuml;che gegen die Prestige
-              GmbH, welche sich auf Sch&auml;den materieller oder ideeller Art beziehen,
-              die durch die Nutzung oder Nichtnutzung der dargebotenen Informationen bzw.
-              durch die Nutzung fehlerhafter und unvollst&auml;ndiger Informationen
-              verursacht wurden, sind grunds&auml;tzlich ausgeschlossen, sofern seitens
-              der Prestige GmbH kein nachweislich vors&auml;tzliches oder grob
-              fahrl&auml;ssiges Verschulden vorliegt.
-            </p>
+            <div className="space-y-8">
+              <div>
+                <h3 className="font-sans text-ink uppercase tracking-[-0.015em] mb-3" style={{ fontWeight: 700 }}>
+                  {t('liabilityContentHeading')}
+                </h3>
+                <p>{t('liabilityContentBody')}</p>
+              </div>
 
-            <h3 className="text-base font-light text-white mb-3">2. Verweise und Links</h3>
-            <p className="mb-6">
-              Bei direkten oder indirekten Verweisen auf fremde Webseiten
-              (&quot;Hyperlinks&quot;), die au&szlig;erhalb des Verantwortungsbereiches
-              der Prestige GmbH liegen, w&uuml;rde eine Haftungsverpflichtung
-              ausschlie&szlig;lich in dem Fall in Kraft treten, in dem die Prestige GmbH
-              von den Inhalten Kenntnis hat und es ihr technisch m&ouml;glich und zumutbar
-              w&auml;re, die Nutzung im Falle rechtswidriger Inhalte zu verhindern. Die
-              Prestige GmbH erkl&auml;rt hiermit ausdr&uuml;cklich, dass zum Zeitpunkt
-              der Linksetzung keine illegalen Inhalte auf den zu verlinkenden Seiten
-              erkennbar waren. Auf die aktuelle und zuk&uuml;nftige Gestaltung, die
-              Inhalte oder die Urheberschaft der verlinkten/verkn&uuml;pften Seiten hat
-              die Prestige GmbH keinerlei Einfluss. Deshalb distanziert sie sich hiermit
-              ausdr&uuml;cklich von allen Inhalten aller verlinkten/verkn&uuml;pften
-              Seiten, die nach der Linksetzung ver&auml;ndert wurden.
-            </p>
+              <div>
+                <h3 className="font-sans text-ink uppercase tracking-[-0.015em] mb-3" style={{ fontWeight: 700 }}>
+                  {t('liabilityLinksHeading')}
+                </h3>
+                <p>{t('liabilityLinksBody')}</p>
+              </div>
 
-            <h3 className="text-base font-light text-white mb-3">3. Urheber- und Kennzeichenrecht</h3>
-            <p className="mb-6">
-              Die Prestige GmbH ist bestrebt, in allen Publikationen die Urheberrechte der
-              verwendeten Bilder, Grafiken, Tondokumente, Videosequenzen und Texte zu
-              beachten, von ihr selbst erstellte Bilder, Grafiken, Tondokumente,
-              Videosequenzen und Texte zu nutzen oder auf lizenzfreie Grafiken,
-              Tondokumente, Videosequenzen und Texte zur&uuml;ckzugreifen. Alle innerhalb
-              des Internetangebotes genannten und ggf. durch Dritte gesch&uuml;tzten
-              Marken- und Warenzeichen unterliegen uneingeschr&auml;nkt den Bestimmungen
-              des jeweils g&uuml;ltigen Kennzeichenrechts und den Besitzrechten der
-              jeweiligen eingetragenen Eigent&uuml;mer. Allein aufgrund der blo&szlig;en
-              Nennung ist nicht der Schluss zu ziehen, dass Markenzeichen nicht durch
-              Rechte Dritter gesch&uuml;tzt sind.
-            </p>
+              <div>
+                <h3 className="font-sans text-ink uppercase tracking-[-0.015em] mb-3" style={{ fontWeight: 700 }}>
+                  {t('liabilityCopyrightHeading')}
+                </h3>
+                <p>{t('liabilityCopyrightBody')}</p>
+              </div>
 
-            <h3 className="text-base font-light text-white mb-3">4. Datenschutz</h3>
-            <p className="mb-6">
-              Sofern innerhalb des Internetangebotes die M&ouml;glichkeit zur Eingabe
-              pers&ouml;nlicher oder gesch&auml;ftlicher Daten (E-Mail-Adressen, Namen,
-              Anschriften) besteht, so erfolgt die Preisgabe dieser Daten seitens des
-              Nutzers auf ausdr&uuml;cklich freiwilliger Basis. Die Inanspruchnahme und
-              Bezahlung aller angebotenen Dienste ist &mdash; soweit technisch
-              m&ouml;glich und zumutbar &mdash; auch ohne Angabe solcher Daten bzw. unter
-              Angabe anonymisierter Daten oder eines Pseudonyms gestattet.
-            </p>
+              <div>
+                <h3 className="font-sans text-ink uppercase tracking-[-0.015em] mb-3" style={{ fontWeight: 700 }}>
+                  {t('liabilityPrivacyHeading')}
+                </h3>
+                <p>{t('liabilityPrivacyBody')}</p>
+              </div>
 
-            <h3 className="text-base font-light text-white mb-3">
-              5. Rechtswirksamkeit dieses Haftungsausschlusses
-            </h3>
-            <p className="mb-6">
-              Dieser Haftungsausschluss ist als Teil des Internetangebotes zu betrachten,
-              von dem aus auf diese Seite verwiesen wurde. Sofern Teile oder einzelne
-              Formulierungen dieses Textes der geltenden Rechtslage nicht, nicht mehr oder
-              nicht vollst&auml;ndig entsprechen sollten, bleiben die &uuml;brigen Teile
-              des Dokumentes in ihrem Inhalt und ihrer G&uuml;ltigkeit davon
-              unber&uuml;hrt.
-            </p>
-          </div>
+              <div>
+                <h3 className="font-sans text-ink uppercase tracking-[-0.015em] mb-3" style={{ fontWeight: 700 }}>
+                  {t('liabilitySeverabilityHeading')}
+                </h3>
+                <p>{t('liabilitySeverabilityBody')}</p>
+              </div>
+            </div>
+          </section>
 
           {/* Gleichstellungshinweis */}
-          <div>
-            <h2 className="text-lg font-light text-white mb-4">Gleichstellungshinweis</h2>
-            <p>
-              Aus Gr&uuml;nden der besseren Lesbarkeit wird bei Personenbezeichnungen und
-              personenbezogenen Hauptw&ouml;rtern auf dieser Website die m&auml;nnliche
-              Form verwendet. Entsprechende Begriffe gelten im Sinne der
-              Gleichbehandlung grunds&auml;tzlich f&uuml;r alle Geschlechter. Die
-              verk&uuml;rzte Sprachform hat nur redaktionelle Gr&uuml;nde und
-              beinhaltet keine Wertung.
-            </p>
-          </div>
+          <section>
+            <h2 className="font-sans text-ink uppercase tracking-[-0.015em] mb-4" style={{ fontWeight: 700 }}>
+              {t('equalityHeading')}
+            </h2>
+            <p>{t('equalityBody')}</p>
+          </section>
         </div>
       </div>
-    </section>
+    </main>
   );
 }

@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useTranslations } from 'next-intl';
 import { Link } from '@/i18n/navigation';
 import { Shield } from 'lucide-react';
@@ -13,7 +13,8 @@ interface ConsentValues {
 
 function getCookie(name: string): string | null {
   const match = document.cookie.match(new RegExp('(^| )' + name + '=([^;]+)'));
-  return match ? decodeURIComponent(match[2]) : null;
+  const value = match?.[2];
+  return value ? decodeURIComponent(value) : null;
 }
 
 function setCookie(name: string, value: string, days: number) {
@@ -30,13 +31,19 @@ export default function CookieConsent() {
     analytics: false,
     marketing: false,
   });
+  const acceptAllRef = useRef<HTMLButtonElement>(null);
 
   useEffect(() => {
-    const existing = getCookie('ps_consent');
-    if (!existing) {
-      setVisible(true);
-    }
+    if (getCookie('ps_consent')) return;
+    const raf = requestAnimationFrame(() => setVisible(true));
+    return () => cancelAnimationFrame(raf);
   }, []);
+
+  // WCAG 2.4.3 — move focus into the dialog when it appears so keyboard users
+  // know it opened and can act on it without hunting.
+  useEffect(() => {
+    if (visible) acceptAllRef.current?.focus();
+  }, [visible]);
 
   const saveConsent = (values: ConsentValues) => {
     setCookie('ps_consent', JSON.stringify(values), 365);
@@ -59,15 +66,28 @@ export default function CookieConsent() {
   if (!visible) return null;
 
   return (
-    <div className="fixed bottom-4 left-4 right-4 md:left-auto md:right-6 md:bottom-6 z-[60] max-w-lg">
-      <div className="bg-dark-secondary border border-dark-border rounded-2xl p-6 shadow-2xl shadow-black/50">
+    <div
+      role="dialog"
+      aria-modal="false"
+      aria-labelledby="cookie-consent-title"
+      className="fixed bottom-4 left-4 right-4 md:left-auto md:right-6 md:bottom-6 z-[60] max-w-lg"
+    >
+      <div className="bg-shadow-soft rounded-lg p-6 shadow-card-floating">
         <div className="flex items-start gap-3 mb-4">
-          <Shield className="w-5 h-5 text-gold flex-shrink-0 mt-0.5" />
+          <Shield className="w-5 h-5 text-gold flex-shrink-0 mt-0.5" aria-hidden />
           <div>
-            <h3 className="text-sm font-medium text-white mb-1">{t('title')}</h3>
-            <p className="text-xs text-neutral-400 leading-relaxed">
+            <h3
+              id="cookie-consent-title"
+              className="text-sm font-medium text-on-shadow mb-1"
+            >
+              {t('title')}
+            </h3>
+            <p className="text-xs text-on-shadow-muted leading-relaxed">
               {t('text')}{' '}
-              <Link href="/datenschutz" className="text-gold/60 hover:text-gold underline transition-colors">
+              <Link
+                href="/datenschutz"
+                className="text-gold/70 hover:text-gold underline transition-colors duration-300"
+              >
                 {t('privacyLink')}
               </Link>
             </p>
@@ -77,83 +97,105 @@ export default function CookieConsent() {
         {showCustomize && (
           <div className="space-y-3 mb-5 pl-8">
             {/* Necessary — always on */}
-            <label className="flex items-center justify-between">
+            <div className="flex items-center justify-between">
               <div>
-                <span className="text-xs text-white">{t('necessary')}</span>
-                <p className="text-[11px] text-neutral-500">{t('necessaryDesc')}</p>
+                <span className="text-xs text-on-shadow">{t('necessary')}</span>
+                <p className="text-[11px] text-on-shadow-muted/70">{t('necessaryDesc')}</p>
               </div>
-              <div className="w-10 h-5 bg-gold/30 rounded-full relative pointer-events-none">
+              <div
+                aria-hidden
+                className="w-10 h-5 bg-gold/30 rounded-full relative pointer-events-none"
+              >
                 <div className="absolute right-0.5 top-0.5 w-4 h-4 bg-gold rounded-full" />
               </div>
-            </label>
+            </div>
 
             {/* Analytics */}
-            <label className="flex items-center justify-between cursor-pointer">
+            <div className="flex items-center justify-between">
               <div>
-                <span className="text-xs text-white">{t('analytics')}</span>
-                <p className="text-[11px] text-neutral-500">{t('analyticsDesc')}</p>
+                <span className="text-xs text-on-shadow">{t('analytics')}</span>
+                <p className="text-[11px] text-on-shadow-muted/70">{t('analyticsDesc')}</p>
               </div>
               <button
+                type="button"
+                role="switch"
+                aria-checked={consent.analytics}
+                aria-label={t('analytics')}
                 onClick={() => setConsent((c) => ({ ...c, analytics: !c.analytics }))}
                 className={`w-10 h-5 rounded-full relative transition-colors duration-300 ${
-                  consent.analytics ? 'bg-gold/30' : 'bg-dark-tertiary'
+                  consent.analytics ? 'bg-gold/30' : 'bg-shadow-border'
                 }`}
               >
-                <div
-                  className={`absolute top-0.5 w-4 h-4 rounded-full transition-all duration-300 ${
-                    consent.analytics ? 'right-0.5 bg-gold' : 'left-0.5 bg-neutral-600'
+                <span
+                  aria-hidden
+                  className={`absolute top-0.5 w-4 h-4 rounded-full transition-[left,right,background-color] duration-300 ${
+                    consent.analytics
+                      ? 'right-0.5 bg-gold'
+                      : 'left-0.5 bg-on-shadow-muted/40'
                   }`}
                 />
               </button>
-            </label>
+            </div>
 
             {/* Marketing */}
-            <label className="flex items-center justify-between cursor-pointer">
+            <div className="flex items-center justify-between">
               <div>
-                <span className="text-xs text-white">{t('marketing')}</span>
-                <p className="text-[11px] text-neutral-500">{t('marketingDesc')}</p>
+                <span className="text-xs text-on-shadow">{t('marketing')}</span>
+                <p className="text-[11px] text-on-shadow-muted/70">{t('marketingDesc')}</p>
               </div>
               <button
+                type="button"
+                role="switch"
+                aria-checked={consent.marketing}
+                aria-label={t('marketing')}
                 onClick={() => setConsent((c) => ({ ...c, marketing: !c.marketing }))}
                 className={`w-10 h-5 rounded-full relative transition-colors duration-300 ${
-                  consent.marketing ? 'bg-gold/30' : 'bg-dark-tertiary'
+                  consent.marketing ? 'bg-gold/30' : 'bg-shadow-border'
                 }`}
               >
-                <div
-                  className={`absolute top-0.5 w-4 h-4 rounded-full transition-all duration-300 ${
-                    consent.marketing ? 'right-0.5 bg-gold' : 'left-0.5 bg-neutral-600'
+                <span
+                  aria-hidden
+                  className={`absolute top-0.5 w-4 h-4 rounded-full transition-[left,right,background-color] duration-300 ${
+                    consent.marketing
+                      ? 'right-0.5 bg-gold'
+                      : 'left-0.5 bg-on-shadow-muted/40'
                   }`}
                 />
               </button>
-            </label>
+            </div>
           </div>
         )}
 
         <div className="flex flex-wrap gap-2 pl-8">
           {showCustomize ? (
             <button
+              type="button"
               onClick={saveCustom}
-              className="flex-1 bg-gold text-dark text-xs font-medium tracking-wider uppercase py-2.5 px-4 rounded-full hover:bg-gold-light transition-colors duration-300"
+              className="flex-1 bg-gold text-shadow text-xs font-medium tracking-wider uppercase py-2.5 px-4 rounded-full hover:bg-gold-deep hover:text-on-shadow transition-colors duration-300"
             >
               {t('save')}
             </button>
           ) : (
             <>
               <button
+                ref={acceptAllRef}
+                type="button"
                 onClick={acceptAll}
-                className="flex-1 bg-gold text-dark text-xs font-medium tracking-wider uppercase py-2.5 px-4 rounded-full hover:bg-gold-light transition-colors duration-300"
+                className="flex-1 bg-gold text-shadow text-xs font-medium tracking-wider uppercase py-2.5 px-4 rounded-full hover:bg-gold-deep hover:text-on-shadow transition-colors duration-300"
               >
                 {t('acceptAll')}
               </button>
               <button
+                type="button"
                 onClick={rejectAll}
-                className="flex-1 border border-dark-border text-neutral-400 text-xs tracking-wider uppercase py-2.5 px-4 rounded-full hover:text-white hover:border-neutral-500 transition-colors duration-300"
+                className="flex-1 bg-shadow-border text-on-shadow-muted text-xs tracking-wider uppercase py-2.5 px-4 rounded-full hover:text-on-shadow transition-colors duration-300"
               >
                 {t('rejectAll')}
               </button>
               <button
+                type="button"
                 onClick={() => setShowCustomize(true)}
-                className="flex-1 text-neutral-500 text-xs tracking-wider uppercase py-2.5 px-4 rounded-full hover:text-neutral-300 transition-colors duration-300"
+                className="flex-1 text-on-shadow-muted text-xs tracking-wider uppercase py-2.5 px-4 rounded-full hover:text-on-shadow transition-colors duration-300"
               >
                 {t('customize')}
               </button>

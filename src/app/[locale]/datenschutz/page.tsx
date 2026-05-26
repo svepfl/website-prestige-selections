@@ -1,293 +1,235 @@
+import type { Metadata } from 'next';
 import { useTranslations } from 'next-intl';
+import { getTranslations } from 'next-intl/server';
+import { jsonLd } from '@/lib/json-ld';
+import Breadcrumbs from '@/components/Breadcrumbs';
 
-export default function DatenschutzPage() {
+const BASE_URL = 'https://www.prestige-selections.com';
+const locales = ['de', 'en', 'fr'] as const;
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+  const { locale } = await params;
+  const safeLocale = (locales as readonly string[]).includes(locale) ? locale : 'de';
+  const t = await getTranslations({ locale: safeLocale, namespace: 'datenschutz' });
+  const url = `${BASE_URL}/${safeLocale}/datenschutz`;
+  return {
+    title: t('title'),
+    description: t('intro'),
+    alternates: {
+      canonical: url,
+      languages: Object.fromEntries(locales.map((l) => [l, `${BASE_URL}/${l}/datenschutz`])),
+    },
+    robots: { index: true, follow: true },
+  };
+}
+
+export default async function DatenschutzPage({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}) {
+  const { locale } = await params;
+  const safeLocale = (locales as readonly string[]).includes(locale) ? locale : 'de';
+  return <DatenschutzContent locale={safeLocale} />;
+}
+
+function DatenschutzContent({ locale }: { locale: string }) {
   const t = useTranslations('datenschutz');
+  const isNonBinding = locale !== 'de';
+
+  const schema = {
+    '@context': 'https://schema.org',
+    '@type': 'WebPage',
+    name: t('title'),
+    description: t('intro'),
+    url: `${BASE_URL}/${locale}/datenschutz`,
+    inLanguage: locale,
+    isPartOf: { '@id': `${BASE_URL}/#website` },
+    about: { '@id': `${BASE_URL}/#dealer` },
+  };
+
+  const breadcrumbSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: t('title'), item: `${BASE_URL}/${locale}/datenschutz` },
+    ],
+  };
 
   return (
-    <section className="bg-dark pt-32 pb-24 md:pb-32">
-      <div className="max-w-3xl mx-auto px-6">
-        <h1 className="text-3xl md:text-5xl font-light text-white tracking-tight mb-12">
+    <main className="bg-canvas text-ink pt-32 pb-24 md:pb-32">
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: jsonLd(schema) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: jsonLd(breadcrumbSchema) }} />
+
+      <div className="px-6 md:px-10 lg:px-14">
+        <div className="mx-auto max-w-[920px]">
+          <Breadcrumbs locale={locale} items={[{ label: t('title') }]} />
+        </div>
+      </div>
+
+      <div className="max-w-[920px] mx-auto px-6 md:px-10 lg:px-14">
+        <p className="font-mono-spec text-[10px] uppercase tracking-[0.32em] text-gold-deep mb-6">
+          {t('label')}
+        </p>
+        <h1
+          className="font-sans text-ink leading-[0.95] tracking-[-0.03em] uppercase mb-10"
+          style={{ fontWeight: 700, fontSize: 'clamp(2rem, 5vw, 4rem)' }}
+        >
           {t('title')}
         </h1>
 
-        <div className="prose-invert space-y-10 text-neutral-300 text-sm leading-relaxed">
+        <p
+          className="font-display italic text-ink-soft leading-[1.55] mb-10 max-w-[60ch]"
+          style={{ fontWeight: 300, fontSize: 'clamp(1.0625rem, 1.7vw, 1.3rem)' }}
+        >
+          {t('intro')}
+        </p>
+
+        {isNonBinding && (
+          <p className="mb-12 font-mono-spec text-[11px] uppercase tracking-[0.24em] text-ink-muted border-l-2 border-gold-deep/40 pl-5 py-1 leading-[1.7]">
+            {t('bindingNotice')}
+          </p>
+        )}
+
+        <div className="space-y-12 text-ink-soft text-[15px] leading-[1.7]">
           {/* 1. Verantwortlicher */}
-          <div>
-            <h2 className="text-lg font-light text-white mb-4">
-              1. Verantwortlicher
+          <section>
+            <h2 className="font-sans text-ink uppercase tracking-[-0.015em] mb-4" style={{ fontWeight: 700 }}>
+              {t('controllerHeading')}
             </h2>
-            <p>
-              Verantwortlicher im Sinne der Datenschutz-Grundverordnung (DSGVO) und
-              anderer nationaler Datenschutzgesetze sowie sonstiger
-              datenschutzrechtlicher Bestimmungen ist:
+            <p>{t('controllerBody')}</p>
+            <p className="mt-4 font-mono-spec text-[13px] leading-[1.7]">
+              {t('controllerContact')}
             </p>
-            <p className="mt-4">
-              Prestige GmbH<br />
-              Engesserstra&szlig;e 1<br />
-              79108 Freiburg<br />
-              Telefon: +49 761 5573168<br />
-              E-Mail: info@prestige-selections.com<br />
-              Gesch&auml;ftsf&uuml;hrer: J&eacute;r&ocirc;me Gay
-            </p>
-          </div>
+          </section>
 
-          {/* 2. Erhebung und Speicherung */}
-          <div>
-            <h2 className="text-lg font-light text-white mb-4">
-              2. Erhebung und Speicherung personenbezogener Daten sowie Art und Zweck
-              von deren Verwendung
+          {/* 2. Collection */}
+          <section>
+            <h2 className="font-sans text-ink uppercase tracking-[-0.015em] mb-6" style={{ fontWeight: 700 }}>
+              {t('collectionHeading')}
             </h2>
 
-            <h3 className="text-base font-light text-white mb-3 mt-6">
-              a) Beim Besuch der Website
-            </h3>
-            <p>
-              Beim Aufrufen unserer Website werden durch den auf Ihrem Endger&auml;t
-              zum Einsatz kommenden Browser automatisch Informationen an den Server
-              unserer Website gesendet. Diese Informationen werden tempor&auml;r in
-              einem sogenannten Logfile gespeichert. Folgende Informationen werden dabei
-              ohne Ihr Zutun erfasst und bis zur automatisierten L&ouml;schung
-              gespeichert:
-            </p>
-            <ul className="list-disc pl-6 mt-3 space-y-1">
-              <li>IP-Adresse des anfragenden Rechners</li>
-              <li>Datum und Uhrzeit des Zugriffs</li>
-              <li>Name und URL der abgerufenen Datei</li>
-              <li>Website, von der aus der Zugriff erfolgt (Referrer-URL)</li>
-              <li>
-                Verwendeter Browser und ggf. das Betriebssystem Ihres Rechners sowie
-                der Name Ihres Access-Providers
-              </li>
-            </ul>
-            <p className="mt-4">
-              Die genannten Daten werden durch uns zu folgenden Zwecken verarbeitet:
-            </p>
-            <ul className="list-disc pl-6 mt-3 space-y-1">
-              <li>
-                Gew&auml;hrleistung eines reibungslosen Verbindungsaufbaus der Website
-              </li>
-              <li>Gew&auml;hrleistung einer komfortablen Nutzung unserer Website</li>
-              <li>Auswertung der Systemsicherheit und -stabilit&auml;t</li>
-              <li>Zu weiteren administrativen Zwecken</li>
-            </ul>
-            <p className="mt-4">
-              Die Rechtsgrundlage f&uuml;r die Datenverarbeitung ist Art. 6 Abs. 1 S. 1
-              lit. f DSGVO. Unser berechtigtes Interesse folgt aus den oben aufgelisteten
-              Zwecken zur Datenerhebung.
-            </p>
+            <div className="space-y-8">
+              <div>
+                <h3 className="font-sans text-ink uppercase tracking-[-0.015em] mb-3" style={{ fontWeight: 700 }}>
+                  {t('visitHeading')}
+                </h3>
+                <p>{t('visitBody')}</p>
+                <ul className="list-disc pl-6 mt-3 space-y-1.5">
+                  <li>{t('visitLog1')}</li>
+                  <li>{t('visitLog2')}</li>
+                  <li>{t('visitLog3')}</li>
+                  <li>{t('visitLog4')}</li>
+                  <li>{t('visitLog5')}</li>
+                </ul>
+                <p className="mt-4 font-medium text-ink">{t('visitPurposes')}</p>
+                <ul className="list-disc pl-6 mt-3 space-y-1.5">
+                  <li>{t('visitPurpose1')}</li>
+                  <li>{t('visitPurpose2')}</li>
+                  <li>{t('visitPurpose3')}</li>
+                  <li>{t('visitPurpose4')}</li>
+                </ul>
+                <p className="mt-4 italic text-ink-muted">{t('visitLegal')}</p>
+              </div>
 
-            <h3 className="text-base font-light text-white mb-3 mt-6">
-              b) Bei Nutzung unseres Kontaktformulars
-            </h3>
-            <p>
-              Bei Fragen jeglicher Art bieten wir Ihnen die M&ouml;glichkeit, mit uns
-              &uuml;ber ein auf der Website bereitgestelltes Formular Kontakt
-              aufzunehmen. Dabei ist die Angabe einer g&uuml;ltigen E-Mail-Adresse
-              sowie Ihres Namens erforderlich, damit wir wissen, von wem die Anfrage
-              stammt und um diese beantworten zu k&ouml;nnen. Weitere Angaben
-              k&ouml;nnen freiwillig get&auml;tigt werden.
-            </p>
-            <p className="mt-4">
-              Die Datenverarbeitung zum Zwecke der Kontaktaufnahme mit uns erfolgt nach
-              Art. 6 Abs. 1 S. 1 lit. a DSGVO auf Grundlage Ihrer freiwillig erteilten
-              Einwilligung. Die f&uuml;r die Benutzung des Kontaktformulars von uns
-              erhobenen personenbezogenen Daten werden nach Erledigung der von Ihnen
-              gestellten Anfrage automatisch gel&ouml;scht.
-            </p>
-          </div>
+              <div>
+                <h3 className="font-sans text-ink uppercase tracking-[-0.015em] mb-3" style={{ fontWeight: 700 }}>
+                  {t('formHeading')}
+                </h3>
+                <p>{t('formBody')}</p>
+              </div>
+            </div>
+          </section>
 
-          {/* 3. Cookies */}
-          <div>
-            <h2 className="text-lg font-light text-white mb-4">
-              3. Cookies
+          {/* 3. Analytics */}
+          <section>
+            <h2 className="font-sans text-ink uppercase tracking-[-0.015em] mb-4" style={{ fontWeight: 700 }}>
+              {t('analyticsHeading')}
             </h2>
-            <p>
-              Wir setzen auf unserer Website Cookies ein. Hierbei handelt es sich um
-              kleine Dateien, die Ihr Browser automatisch erstellt und die auf Ihrem
-              Endger&auml;t gespeichert werden, wenn Sie unsere Website besuchen.
-            </p>
-            <p className="mt-4">
-              Wir verwenden folgende Arten von Cookies:
-            </p>
-            <ul className="list-disc pl-6 mt-3 space-y-1">
-              <li>
-                <strong className="text-white">Notwendige Cookies:</strong> Cookies, die
-                f&uuml;r den Betrieb der Website zwingend erforderlich sind (z. B.
-                Spracheinstellungen, Cookie-Einwilligung).
-              </li>
-              <li>
-                <strong className="text-white">Analyse-Cookies:</strong> Cookies, die uns
-                helfen, die Nutzung unserer Website zu analysieren und zu verbessern.
-                Diese werden erst nach Ihrer ausdr&uuml;cklichen Einwilligung gesetzt.
-              </li>
-              <li>
-                <strong className="text-white">Marketing-Cookies:</strong> Cookies, die
-                f&uuml;r die Ausspielung personalisierter Werbung verwendet werden.
-                Diese werden erst nach Ihrer ausdr&uuml;cklichen Einwilligung gesetzt.
-              </li>
-            </ul>
-            <p className="mt-4">
-              Sie k&ouml;nnen Ihre Cookie-Einstellungen jederzeit &uuml;ber unseren
-              Cookie-Banner anpassen oder in Ihren Browser-Einstellungen Cookies
-              deaktivieren.
-            </p>
-          </div>
+            <p className="mb-6">{t('analyticsIntro')}</p>
 
-          {/* 4. Tracking */}
-          <div>
-            <h2 className="text-lg font-light text-white mb-4">
-              4. Webanalyse und Tracking
+            <div className="space-y-8">
+              <div>
+                <h3 className="font-sans text-ink uppercase tracking-[-0.015em] mb-3" style={{ fontWeight: 700 }}>
+                  {t('plausibleHeading')}
+                </h3>
+                <p>{t('plausibleBody')}</p>
+              </div>
+
+              <div>
+                <h3 className="font-sans text-ink uppercase tracking-[-0.015em] mb-3" style={{ fontWeight: 700 }}>
+                  {t('stapeHeading')}
+                </h3>
+                <p>{t('stapeBody')}</p>
+                <p className="mt-4 font-mono-spec text-[12px] uppercase tracking-[0.22em] text-ink-muted leading-[1.7] border-l border-ink/15 pl-4 py-1">
+                  {t('consentModeNote')}
+                </p>
+              </div>
+            </div>
+          </section>
+
+          {/* 4. Cookies */}
+          <section>
+            <h2 className="font-sans text-ink uppercase tracking-[-0.015em] mb-4" style={{ fontWeight: 700 }}>
+              {t('cookiesHeading')}
             </h2>
-            <p>
-              Wir verwenden auf unserer Website den Google Tag Manager (GTM), der
-              &uuml;ber einen serverseitigen Container bei Stape.io betrieben wird. Der
-              serverseitige GTM-Container fungiert als Proxy zwischen Ihrer Website und
-              den Analysediensten, wodurch Ihre Daten nicht direkt an Drittanbieter
-              gesendet werden, sondern zun&auml;chst an unseren eigenen Server
-              &uuml;bermittelt und dort verarbeitet werden.
-            </p>
-            <p className="mt-4">
-              Dies bietet folgende Vorteile:
-            </p>
-            <ul className="list-disc pl-6 mt-3 space-y-1">
-              <li>Erh&ouml;hter Datenschutz durch serverseitige Verarbeitung</li>
-              <li>
-                Reduzierung der an Drittanbieter weitergegebenen Daten auf das notwendige
-                Minimum
-              </li>
-              <li>
-                Bessere Kontrolle &uuml;ber die Datenverarbeitung
-              </li>
+            <p>{t('cookiesIntro')}</p>
+            <ul className="list-disc pl-6 mt-4 space-y-2">
+              <li><strong className="text-ink">{t('cookieNecessary')}</strong></li>
+              <li>{t('cookieAnalytics')}</li>
+              <li>{t('cookieMarketing')}</li>
             </ul>
+            <p className="mt-4 italic">{t('cookieControl')}</p>
+          </section>
 
-            <h3 className="text-base font-light text-white mb-3 mt-6">
-              Google Analytics
-            </h3>
-            <p>
-              Wir nutzen Google Analytics 4 (GA4) &uuml;ber den serverseitigen
-              GTM-Container. Google Analytics verwendet Cookies, um eine Analyse der
-              Benutzung der Website zu erm&ouml;glichen. Die durch das Cookie erzeugten
-              Informationen &uuml;ber Ihre Benutzung dieser Website werden zun&auml;chst
-              an unseren serverseitigen Container &uuml;bermittelt und von dort in
-              anonymisierter Form an einen Server von Google in der EU &uuml;bertragen.
-            </p>
-            <p className="mt-4">
-              Google Analytics wird nur aktiviert, wenn Sie Ihre Einwilligung &uuml;ber
-              unseren Cookie-Banner erteilt haben (Art. 6 Abs. 1 S. 1 lit. a DSGVO). Wir
-              setzen Google Consent Mode v2 ein, um Ihre Einwilligungsentscheidung an
-              Google zu &uuml;bermitteln.
-            </p>
-          </div>
-
-          {/* 5. Google Consent Mode v2 */}
-          <div>
-            <h2 className="text-lg font-light text-white mb-4">
-              5. Google Consent Mode v2
+          {/* 5. AI */}
+          <section>
+            <h2 className="font-sans text-ink uppercase tracking-[-0.015em] mb-4" style={{ fontWeight: 700 }}>
+              {t('aiHeading')}
             </h2>
-            <p>
-              Wir verwenden den Google Consent Mode v2, um Ihre
-              Einwilligungsentscheidungen an Google-Dienste zu &uuml;bermitteln. Dabei
-              werden folgende Zustimmungssignale verarbeitet:
-            </p>
-            <ul className="list-disc pl-6 mt-3 space-y-1">
-              <li>
-                <strong className="text-white">analytics_storage:</strong> Steuert, ob
-                Analyse-Cookies gesetzt werden d&uuml;rfen.
-              </li>
-              <li>
-                <strong className="text-white">ad_storage:</strong> Steuert, ob
-                Marketing-/Werbe-Cookies gesetzt werden d&uuml;rfen.
-              </li>
-              <li>
-                <strong className="text-white">ad_user_data:</strong> Steuert, ob
-                Nutzerdaten an Google f&uuml;r Werbezwecke &uuml;bermittelt werden
-                d&uuml;rfen.
-              </li>
-              <li>
-                <strong className="text-white">ad_personalization:</strong> Steuert, ob
-                personalisierte Werbung angezeigt werden darf.
-              </li>
-            </ul>
-            <p className="mt-4">
-              Ohne Ihre Einwilligung werden alle Signale standardm&auml;&szlig;ig auf
-              &quot;denied&quot; (abgelehnt) gesetzt.
-            </p>
-          </div>
+            <p>{t('aiBody')}</p>
+          </section>
 
-          {/* 6. Rechte */}
-          <div>
-            <h2 className="text-lg font-light text-white mb-4">
-              6. Rechte der betroffenen Person
+          {/* 6. Rights */}
+          <section>
+            <h2 className="font-sans text-ink uppercase tracking-[-0.015em] mb-4" style={{ fontWeight: 700 }}>
+              {t('rightsHeading')}
             </h2>
-            <p>Sie haben das Recht:</p>
-            <ul className="list-disc pl-6 mt-3 space-y-1">
-              <li>
-                gem&auml;&szlig; Art. 15 DSGVO Auskunft &uuml;ber Ihre von uns
-                verarbeiteten personenbezogenen Daten zu verlangen;
-              </li>
-              <li>
-                gem&auml;&szlig; Art. 16 DSGVO unverz&uuml;glich die Berichtigung
-                unrichtiger oder Vervollst&auml;ndigung Ihrer bei uns gespeicherten
-                personenbezogenen Daten zu verlangen;
-              </li>
-              <li>
-                gem&auml;&szlig; Art. 17 DSGVO die L&ouml;schung Ihrer bei uns
-                gespeicherten personenbezogenen Daten zu verlangen;
-              </li>
-              <li>
-                gem&auml;&szlig; Art. 18 DSGVO die Einschr&auml;nkung der Verarbeitung
-                Ihrer personenbezogenen Daten zu verlangen;
-              </li>
-              <li>
-                gem&auml;&szlig; Art. 20 DSGVO Ihre personenbezogenen Daten in einem
-                strukturierten, g&auml;ngigen und maschinenlesbaren Format zu erhalten
-                oder die &Uuml;bermittlung an einen anderen Verantwortlichen zu
-                verlangen;
-              </li>
-              <li>
-                gem&auml;&szlig; Art. 7 Abs. 3 DSGVO Ihre einmal erteilte Einwilligung
-                jederzeit gegen&uuml;ber uns zu widerrufen;
-              </li>
-              <li>
-                gem&auml;&szlig; Art. 77 DSGVO sich bei einer Aufsichtsbeh&ouml;rde zu
-                beschweren.
-              </li>
+            <p>{t('rightsIntro')}</p>
+            <ul className="list-disc pl-6 mt-4 space-y-2">
+              <li>{t('rightsItem1')}</li>
+              <li>{t('rightsItem2')}</li>
+              <li>{t('rightsItem3')}</li>
+              <li>{t('rightsItem4')}</li>
+              <li>{t('rightsItem5')}</li>
+              <li>{t('rightsItem6')}</li>
+              <li>{t('rightsItem7')}</li>
+              <li>{t('rightsItem8')}</li>
             </ul>
-            <p className="mt-4">
-              Zust&auml;ndige Aufsichtsbeh&ouml;rde: Der Landesbeauftragte f&uuml;r den
-              Datenschutz und die Informationsfreiheit Baden-W&uuml;rttemberg.
-            </p>
-          </div>
+            <p className="mt-5 font-mono-spec text-[12px] leading-[1.7]">{t('rightsAuthority')}</p>
+          </section>
 
           {/* 7. SSL */}
-          <div>
-            <h2 className="text-lg font-light text-white mb-4">
-              7. SSL-Verschl&uuml;sselung
+          <section>
+            <h2 className="font-sans text-ink uppercase tracking-[-0.015em] mb-4" style={{ fontWeight: 700 }}>
+              {t('sslHeading')}
             </h2>
-            <p>
-              Diese Website nutzt aus Sicherheitsgr&uuml;nden und zum Schutz der
-              &Uuml;bertragung vertraulicher Inhalte eine SSL-Verschl&uuml;sselung. Eine
-              verschl&uuml;sselte Verbindung erkennen Sie daran, dass die Adresszeile des
-              Browsers von &quot;http://&quot; auf &quot;https://&quot; wechselt und an
-              dem Schloss-Symbol in Ihrer Browserzeile.
-            </p>
-          </div>
+            <p>{t('sslBody')}</p>
+          </section>
 
-          {/* 8. Aktualität */}
-          <div>
-            <h2 className="text-lg font-light text-white mb-4">
-              8. Aktualit&auml;t und &Auml;nderung dieser Datenschutzerkl&auml;rung
+          {/* 8. Updates */}
+          <section>
+            <h2 className="font-sans text-ink uppercase tracking-[-0.015em] mb-4" style={{ fontWeight: 700 }}>
+              {t('updatesHeading')}
             </h2>
-            <p>
-              Diese Datenschutzerkl&auml;rung ist aktuell g&uuml;ltig und hat den Stand
-              M&auml;rz 2026. Durch die Weiterentwicklung unserer Website und Angebote
-              dar&uuml;ber oder aufgrund ge&auml;nderter gesetzlicher beziehungsweise
-              beh&ouml;rdlicher Vorgaben kann es notwendig werden, diese
-              Datenschutzerkl&auml;rung zu &auml;ndern.
-            </p>
-          </div>
+            <p>{t('updatesBody')}</p>
+          </section>
         </div>
       </div>
-    </section>
+    </main>
   );
 }

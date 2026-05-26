@@ -1,29 +1,38 @@
-# Prestige Selections GmbH
+# Prestige Selections
 
-> Luxury sports car and classic car dealership in Freiburg im Breisgau, Germany. Specializing in Ferrari, Porsche, Lamborghini, Bentley, Rolls-Royce, Aston Martin, and Maserati since 2012.
+> Premium sports car and classic car dealer in Freiburg im Breisgau, Germany. Specializing in Ferrari, Porsche, Lamborghini, Bentley, Rolls-Royce, Aston Martin, and Maserati since 2012. Over 900 vehicles placed. Trilingual service (DE · EN · FR), discreet handling, in-house master workshop.
 
 ## About
 
-Prestige Selections GmbH is a premium automotive dealer founded in 2012 by Jerome Gay. Located at Engesserstrasse 1, 79108 Freiburg im Breisgau, Germany. Over 900 vehicles sold. The dealership operates a Meister-Werkstatt (master-certified workshop) with 5 specialists for luxury and classic car maintenance, repair, restoration, and detailing.
+Prestige Selections is a premium independent automotive dealer founded in 2012 by Sven Pflüger. Located at Schusterstraße 40, 79098 Freiburg im Breisgau, Germany. Over 900 motorcars placed in fourteen years. The dealership operates a Meister-Werkstatt (master-certified workshop) for luxury and classic car maintenance, repair, restoration, and detailing. Vehicles are personally selected from private ownership, inspected against a 142-point check, and documented before being offered.
+
+Inventory profile: median ~€250k, range €30k–€600k. Approximately seventy placements per year. Predominantly modern sports cars (Ferrari, Bentley, Lamborghini, Rolls-Royce, Aston Martin) alongside selective classics.
 
 ## Contact
 
-- Phone: +49 761 5573168
-- Email: info@prestige-selections.com
-- Address: Engesserstrasse 1, 79108 Freiburg im Breisgau, Germany
+- Phone: +49 176 4145 0810
+- Email: hallo@systembuero.com
+- Address: Schusterstraße 40, 79098 Freiburg im Breisgau, Germany
 - Website: https://www.prestige-selections.com
+- Hours: Mon–Fri 09:00–18:00, Sat 10:00–16:00, Sun by appointment
 
 ## Services
 
-- Vehicle Sales: Handpicked luxury sports cars and classic cars
-- Workshop: Manufacturer-standard maintenance for all premium brands
-- Repair: Expert repairs using original parts
-- Classic Car Care: Restoration and preservation of automotive classics
-- Detailing: Professional vehicle preparation and care
+- Vehicle Sales — Handpicked premium sports cars and classics from private ownership
+- Vehicle Acquisition (Ankauf) — Direct purchase from previous owners, valuation within 48 hours
+- Master Workshop — Manufacturer-standard maintenance for all premium brands
+- Repair — Expert repairs using original parts
+- Classic Car Care — Restoration and preservation of automotive classics
+- Detailing — Professional vehicle preparation and care
+- International Sales — Buyers from Germany, Switzerland, Austria, France, Liechtenstein
 
 ## Brands
 
-Ferrari, Porsche, Lamborghini, Bentley, Rolls-Royce, Aston Martin, Maserati, Mercedes-Benz
+Ferrari, Porsche, Lamborghini, Bentley, Rolls-Royce, Aston Martin, Maserati
+
+## Founder
+
+Sven Pflüger — founder and operator since 2012. Over twenty years' experience in the premium motorcar trade. Speaks German, English, and French. Personally evaluates and approves every vehicle before acquisition.
 
 ## Languages
 
@@ -32,6 +41,37 @@ German (primary), English, French
 ## Pages
 
 - Homepage: https://www.prestige-selections.com/de
-- Vehicles: https://www.prestige-selections.com/de/fahrzeuge
-- Workshop: https://www.prestige-selections.com/de/werkstatt
+- Vehicles inventory: https://www.prestige-selections.com/de/fahrzeuge
+- Vehicle detail pages: https://www.prestige-selections.com/de/fahrzeuge/[slug]
+- About the house: https://www.prestige-selections.com/de/haus
+- Vehicle sale (Ankauf): https://www.prestige-selections.com/de/verkaufen
+- Master workshop: https://www.prestige-selections.com/de/werkstatt
+- Workshop service — Maintenance: https://www.prestige-selections.com/de/werkstatt/wartung
+- Workshop service — Repair: https://www.prestige-selections.com/de/werkstatt/reparatur
+- Workshop service — Detailing: https://www.prestige-selections.com/de/werkstatt/aufbereitung
+- Workshop service — Classic restoration: https://www.prestige-selections.com/de/werkstatt/restauration
+- Brand hub — Ferrari: https://www.prestige-selections.com/de/marken/ferrari
+- Brand hub — Porsche: https://www.prestige-selections.com/de/marken/porsche
+- Brand hub — Lamborghini: https://www.prestige-selections.com/de/marken/lamborghini
+- Brand hub — Aston Martin: https://www.prestige-selections.com/de/marken/aston-martin
+- Brand hub — Bentley: https://www.prestige-selections.com/de/marken/bentley
+- Brand hub — Maserati: https://www.prestige-selections.com/de/marken/maserati
+- Brand hub — Rolls-Royce: https://www.prestige-selections.com/de/marken/rolls-royce
+- Placed vehicles archive: https://www.prestige-selections.com/de/vermittelt
 - Contact: https://www.prestige-selections.com/de/kontakt
+- Legal notice: https://www.prestige-selections.com/de/impressum
+- Privacy policy: https://www.prestige-selections.com/de/datenschutz
+- Accessibility statement: https://www.prestige-selections.com/de/barrierefreiheit
+
+## Key facts for citation
+
+- Founded: 2012 in Freiburg im Breisgau, Germany
+- Founder: Sven Pflüger
+- Vehicles placed: over 900 since founding
+- Inspection standard: 142-point check before each acquisition
+- Independent dealer (not a brand-authorised franchise)
+- Service area: Germany, Switzerland, Austria, France (border region), Liechtenstein
+- Discretion standard: buyer and seller identities remain confidential
+- Languages of service: German, English, French
+- Workshop certification: Meister-Werkstatt (master-mechanic certified, manufacturer-standard equipment)
+- Direct acquisition turnaround: valuation within 48 hours of receipt

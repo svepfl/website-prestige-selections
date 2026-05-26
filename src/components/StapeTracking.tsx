@@ -2,8 +2,9 @@
 
 import { useEffect, useState } from 'react';
 import Script from 'next/script';
+import { publicEnv } from '@/lib/env';
 
-const GTM_ID = 'GTM-XXXXXXX';
+const GTM_ID = publicEnv.NEXT_PUBLIC_GTM_ID;
 const STAPE_URL = 'https://stape.prestige-selections.com';
 
 interface ConsentValues {
@@ -15,7 +16,8 @@ interface ConsentValues {
 function getCookie(name: string): string | null {
   if (typeof document === 'undefined') return null;
   const match = document.cookie.match(new RegExp('(^| )' + name + '=([^;]+)'));
-  return match ? decodeURIComponent(match[2]) : null;
+  const value = match?.[2];
+  return value ? decodeURIComponent(value) : null;
 }
 
 function pushConsentDefaults() {
@@ -54,21 +56,22 @@ export default function StapeTracking() {
     // Push default denied state immediately
     pushConsentDefaults();
 
-    // Check existing cookie
+    // Resolve existing cookie → deferred setState (React 19 idiom)
+    let raf = 0;
     const existing = getCookie('ps_consent');
     if (existing) {
       try {
         const values: ConsentValues = JSON.parse(existing);
         if (values.analytics || values.marketing) {
           updateConsent(values);
-          setHasConsent(true);
+          raf = requestAnimationFrame(() => setHasConsent(true));
         }
       } catch {
         // Invalid cookie, ignore
       }
     }
 
-    // Listen for consent updates
+    // Listen for live consent updates
     const handler = (e: Event) => {
       const detail = (e as CustomEvent<ConsentValues>).detail;
       updateConsent(detail);
@@ -78,10 +81,14 @@ export default function StapeTracking() {
     };
 
     window.addEventListener('consentUpdated', handler);
-    return () => window.removeEventListener('consentUpdated', handler);
+    return () => {
+      window.removeEventListener('consentUpdated', handler);
+      if (raf) cancelAnimationFrame(raf);
+    };
   }, []);
 
-  if (!hasConsent) return null;
+  // No tracking if user hasn't consented or GTM ID isn't configured
+  if (!hasConsent || !GTM_ID) return null;
 
   return (
     <>

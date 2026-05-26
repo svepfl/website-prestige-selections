@@ -1,3 +1,9 @@
+export interface VehicleDescription {
+  de: string;
+  en: string;
+  fr: string;
+}
+
 export interface Vehicle {
   id: string;
   manufacturer: string;
@@ -12,6 +18,7 @@ export interface Vehicle {
   vatInfo: "included" | "not_applicable";
   vatRate?: number;
   highlights: string[];
+  description: VehicleDescription;
 }
 
 export const vehicles: Vehicle[] = [
@@ -28,6 +35,11 @@ export const vehicles: Vehicle[] = [
     price: 215000,
     vatInfo: "not_applicable",
     highlights: ["Carbon Package", "1st Owner", "Service History"],
+    description: {
+      de: "Ein kompromissloser Grand Tourer aus erster Hand. Das umfassende Carbonpaket innen und außen unterstreicht den Charakter des 725 PS starken V12, die lückenlose Scheckheft- und Servicehistorie steht für den makellosen Zustand. Persönliche Übergabe und detaillierte Dokumentation auf Wunsch.",
+      en: "An uncompromising grand tourer from first ownership. The comprehensive carbon package inside and out underlines the character of the 725 hp V12, while the complete service history reflects its pristine condition. Personal handover and detailed documentation on request.",
+      fr: "Une grande routière sans compromis, première main. Le pack carbone intégral souligne le caractère du V12 de 725 ch, et l'historique d'entretien complet témoigne de son état irréprochable. Remise personnalisée et documentation détaillée sur demande.",
+    },
   },
   {
     id: "bentley-bentayga-w12",
@@ -42,6 +54,11 @@ export const vehicles: Vehicle[] = [
     price: 74900,
     vatInfo: "not_applicable",
     highlights: ["W12", "Full Bentley History", "Rear Seat Entertainment"],
+    description: {
+      de: "Bentleys großer SUV mit W12 und umfangreicher Ausstattung. Ausschließlich bei Bentley gewartet, lückenlose Historie, Rear Seat Entertainment und adaptive Geschwindigkeitsregelung an Bord. Komfort und Souveränität auf höchstem Niveau.",
+      en: "Bentley's luxurious SUV with the formidable W12 and exclusive specification. Serviced exclusively by Bentley, complete history, Rear Seat Entertainment and adaptive cruise control on board. Comfort and authority at the highest level.",
+      fr: "Le SUV luxueux de Bentley avec son imposant W12 et un équipement exclusif. Entretenu exclusivement chez Bentley, historique complet, Rear Seat Entertainment et régulateur de vitesse adaptatif. Confort et prestance au plus haut niveau.",
+    },
   },
   {
     id: "bentley-gtc-v8-azure",
@@ -57,6 +74,11 @@ export const vehicles: Vehicle[] = [
     vatInfo: "included",
     vatRate: 19,
     highlights: ["Azure Edition", "As New", "One of a Kind"],
+    description: {
+      de: "Praktisch neuwertiges Cabriolet in der exklusiven Azure-Ausstattung — ein konfiguriertes Einzelstück mit Tageszulassung. Der V8 bietet 551 PS, dazu kommt die volle Liste an Optionen. Sofort verfügbar, ideal als sportlicher Touring-Begleiter.",
+      en: "A virtually new convertible in the exclusive Azure specification — a one-off configuration with day registration. The V8 delivers 551 hp, fully loaded with options. Available immediately, ideal as a sporting touring companion.",
+      fr: "Cabriolet quasi neuf en finition exclusive Azure — une configuration unique avec immatriculation du jour. Le V8 développe 551 ch, équipement complet. Disponible immédiatement, idéal pour le grand tourisme sportif.",
+    },
   },
   {
     id: "ferrari-sf90-spider",
@@ -72,6 +94,11 @@ export const vehicles: Vehicle[] = [
     vatInfo: "included",
     vatRate: 19,
     highlights: ["1000 PS", "Carbon Seats", "German Delivery"],
+    description: {
+      de: "Ferraris Plug-in-Hybrid-Supersportler mit 1.000 PS — als Spider und nahezu neuwertig. Deutsche Auslieferung, Carbonschalensitze, Lift-System und JBL-Soundsystem. Eine moderne Ikone, die Tradition und Zukunft des Hauses Maranello vereint.",
+      en: "Ferrari's plug-in hybrid supercar with 1,000 hp — as a Spider and virtually new. German delivery, carbon bucket seats, lift system and JBL audio. A modern icon that unites Maranello's tradition and future.",
+      fr: "La supercar hybride rechargeable de Ferrari, 1 000 ch — version Spider quasi neuve. Livraison allemande, sièges baquets carbone, système de levage et audio JBL. Une icône moderne qui réunit la tradition et l'avenir de Maranello.",
+    },
   },
   {
     id: "ferrari-330-gtc",
@@ -86,6 +113,11 @@ export const vehicles: Vehicle[] = [
     price: 545000,
     vatInfo: "not_applicable",
     highlights: ["Engine Rebuilt", "Complete History", "Warranty"],
+    description: {
+      de: "Ein Klassiker aus Maranello in fachgerecht überholtem Zustand. Der V12 wurde komplett revidiert, die Historie ist lückenlos dokumentiert und das Fahrzeug wird mit Garantie übergeben. Ein Sammlerstück, das auch heute noch alltagstauglich gefahren werden kann.",
+      en: "A Maranello classic with a professionally rebuilt engine. The V12 has been fully overhauled, the history is completely documented and the car is delivered with warranty. A collector's piece that remains usable for everyday enjoyment.",
+      fr: "Une classique de Maranello avec moteur reconditionné par des professionnels. Le V12 a été entièrement révisé, l'historique est intégralement documenté et la voiture est livrée avec garantie. Une pièce de collection que l'on peut continuer à utiliser au quotidien.",
+    },
   },
   {
     id: "ferrari-f430-spider",
@@ -100,6 +132,11 @@ export const vehicles: Vehicle[] = [
     price: 147900,
     vatInfo: "not_applicable",
     highlights: ["Like New", "Carbon Package", "Warranty"],
+    description: {
+      de: "Der F430 Spider gilt als einer der charismatischsten Ferrari der 2000er Jahre. Dieses Exemplar präsentiert sich neuwertig, mit umfangreichem Carbonpaket und F1-Getriebe. Wir übergeben mit Garantie und detaillierter Inspektionsfreigabe.",
+      en: "The F430 Spider is among the most charismatic Ferraris of the 2000s. This example presents as new, with extensive carbon package and F1 gearbox. Handed over with warranty and a detailed inspection report.",
+      fr: "La F430 Spider compte parmi les Ferrari les plus charismatiques des années 2000. Cet exemplaire se présente comme neuf, avec un pack carbone étendu et la boîte F1. Remise avec garantie et rapport d'inspection détaillé.",
+    },
   },
   {
     id: "ferrari-f8-spider",
@@ -114,6 +151,11 @@ export const vehicles: Vehicle[] = [
     price: 389900,
     vatInfo: "not_applicable",
     highlights: ["Atelier Spec", "One of a Kind", "1st Owner"],
+    description: {
+      de: "Ein individuell über das Ferrari-Atelier konfiguriertes Einzelstück aus erster Hand. Mit nur wenigen tausend Kilometern und makelloser Historie. Der 720 PS starke V8 sorgt für ein unvergleichliches Fahrerlebnis unter freiem Himmel.",
+      en: "A one-off configured through the Ferrari Atelier programme, in first ownership and with only a few thousand kilometres. The 720 hp V8 delivers an incomparable open-top experience.",
+      fr: "Un exemplaire unique configuré via le programme Ferrari Atelier, première main avec seulement quelques milliers de kilomètres. Le V8 de 720 ch offre une expérience incomparable à ciel ouvert.",
+    },
   },
   {
     id: "ferrari-812-gts",
@@ -129,6 +171,11 @@ export const vehicles: Vehicle[] = [
     vatInfo: "included",
     vatRate: 19,
     highlights: ["Atelier Spec", "Full Options", "1st Owner"],
+    description: {
+      de: "Vollausgestattetes Atelier-Einzelstück aus erster Hand: der letzte rein verbrennungsbetriebene V12-Spider von Ferrari. 800 PS, exklusive Konfiguration und sorgfältig dokumentierte Historie machen dieses Fahrzeug zur seltenen Sammlerwahl.",
+      en: "Fully optioned Atelier one-off in first ownership: Ferrari's last pure-combustion V12 spider. 800 hp, exclusive configuration and meticulously documented history make this a rare collector's choice.",
+      fr: "Exemplaire Atelier unique entièrement équipé, première main : la dernière spider V12 100 % thermique de Ferrari. 800 ch, configuration exclusive et historique méticuleusement documenté en font un choix de collection rare.",
+    },
   },
   {
     id: "ferrari-f12-nlargo",
@@ -143,6 +190,11 @@ export const vehicles: Vehicle[] = [
     price: 595000,
     vatInfo: "not_applicable",
     highlights: ["Novitec N-Largo", "1 of 15", "Like New"],
+    description: {
+      de: "Eine der nur 15 Novitec N-Largo Wide-Body Umbauten auf F12-Basis — eine seltene Erscheinung und neuwertig erhalten. Die spektakuläre Karosserie kombiniert mit dem leistungsgesteigerten V12 macht dieses Fahrzeug zum Statement.",
+      en: "One of just 15 Novitec N-Largo wide-body conversions on F12 basis — a rare sight kept as new. The spectacular bodywork combined with the uprated V12 makes this car a statement.",
+      fr: "Une des 15 seules conversions wide-body Novitec N-Largo sur base F12 — une rareté maintenue à l'état neuf. La carrosserie spectaculaire combinée au V12 préparé en fait une véritable déclaration.",
+    },
   },
   {
     id: "ferrari-365-daytona",
@@ -157,6 +209,11 @@ export const vehicles: Vehicle[] = [
     price: 298000,
     vatInfo: "not_applicable",
     highlights: ["Competizione Conversion", "Street Legal", "Excellent Condition"],
+    description: {
+      de: "Ein Daytona mit fachgerecht ausgeführter Competizione-Konversion — straßenzugelassen und in herausragendem Zustand. Erstklassige Verarbeitung, charaktervoller V12 und die unverwechselbare Optik einer Renn-Ikone machen dieses Fahrzeug einzigartig.",
+      en: "A Daytona with a professionally executed Competizione conversion — fully road-legal and in outstanding condition. First-rate craftsmanship, a charismatic V12 and the unmistakable look of a racing icon set this car apart.",
+      fr: "Une Daytona avec conversion Competizione réalisée dans les règles de l'art — homologuée route et dans un état exceptionnel. Une exécution de premier ordre, un V12 plein de caractère et la silhouette inimitable d'une icône de course.",
+    },
   },
   {
     id: "ferrari-400gt-cabrio",
@@ -171,6 +228,11 @@ export const vehicles: Vehicle[] = [
     price: 139000,
     vatInfo: "not_applicable",
     highlights: ["Straman Conversion", "1 of 23", "Restored"],
+    description: {
+      de: "Eines von nur 23 Cabrio-Umbauten durch Carrosserie Straman in den USA. Vollständig restauriert, mit V12 und der eleganten Linie des 400GT. Eine seltene und investitionswürdige Möglichkeit, offen Ferrari zu fahren.",
+      en: "One of just 23 Straman convertible conversions carried out in the USA. Fully restored, with V12 and the elegant lines of the 400GT. A rare and investment-worthy way to drive a Ferrari open-top.",
+      fr: "Une des 23 seules conversions cabriolet réalisées par Straman aux USA. Entièrement restaurée, avec V12 et la silhouette élégante de la 400GT. Une manière rare et patrimoniale de rouler Ferrari à ciel ouvert.",
+    },
   },
   {
     id: "ferrari-12cilindri",
@@ -186,6 +248,11 @@ export const vehicles: Vehicle[] = [
     vatInfo: "included",
     vatRate: 19,
     highlights: ["830 PS", "V12", "Brand New"],
+    description: {
+      de: "Der Nachfolger des 812 — Ferraris neuer Frontmotor-V12 mit 830 PS. Praktisch neu, mit minimaler Laufleistung. Der 12Cilindri verbindet klassische Proportionen mit modernster Technik und bleibt seiner V12-Tradition treu.",
+      en: "The successor to the 812 — Ferrari's new front-engined V12 with 830 hp. Virtually new, with minimal mileage. The 12Cilindri pairs classical proportions with state-of-the-art engineering, faithful to the V12 tradition.",
+      fr: "La successeur de la 812 — le nouveau V12 à moteur avant de Ferrari, 830 ch. Quasi neuve, kilométrage minimal. La 12Cilindri allie des proportions classiques à une ingénierie de pointe, fidèle à la tradition V12.",
+    },
   },
   {
     id: "lamborghini-urus-se",
@@ -201,6 +268,11 @@ export const vehicles: Vehicle[] = [
     vatInfo: "included",
     vatRate: 19,
     highlights: ["800 PS Hybrid", "Carbon Package", '23" Wheels'],
+    description: {
+      de: "Der neue Plug-in-Hybrid-Urus SE mit 800 PS Systemleistung — sofort verfügbar und neuwertig. Umfangreiches Carbonpaket, 23-Zoll-Felgen und sämtliche Assistenzpakete sind an Bord. Lamborghinis Super-SUV in seiner bisher kompletteren Form.",
+      en: "The new plug-in hybrid Urus SE with 800 hp combined output — available immediately and as new. Extensive carbon package, 23-inch wheels and the full suite of driver assistance packages. Lamborghini's super-SUV in its most complete form yet.",
+      fr: "Le nouveau Urus SE hybride rechargeable, 800 ch cumulés — disponible immédiatement et à l'état neuf. Pack carbone étendu, jantes 23 pouces et l'ensemble des packs d'assistance. Le super-SUV de Lamborghini dans sa forme la plus aboutie.",
+    },
   },
   {
     id: "maserati-mc20",
@@ -216,6 +288,11 @@ export const vehicles: Vehicle[] = [
     vatInfo: "included",
     vatRate: 19,
     highlights: ["Carbon Exterior", "Lift System", "Special Leasing"],
+    description: {
+      de: "Maseratis Rückkehr zur Supersportwagen-Spitze. Der MC20 mit Nettuno-V6, externem Carbonpaket, Lift-System und Sonos-Audio. Sofort verfügbar mit attraktiver Leasingoption auf Anfrage.",
+      en: "Maserati's return to the top of the supercar segment. The MC20 with Nettuno V6, exterior carbon package, lift system and Sonos audio. Available immediately with an attractive leasing option on request.",
+      fr: "Le retour de Maserati au sommet du segment des supercars. La MC20 avec le V6 Nettuno, pack carbone extérieur, système de levage et audio Sonos. Disponible immédiatement avec offre de leasing attractive sur demande.",
+    },
   },
   {
     id: "maserati-granturismo-trofeo",
@@ -231,6 +308,11 @@ export const vehicles: Vehicle[] = [
     vatInfo: "included",
     vatRate: 19,
     highlights: ["Trofeo", "Brand New", "Full Options"],
+    description: {
+      de: "Die neue Granturismo Trofeo — vollausgestattet, deutsches Modell mit ADAS-Paket, neuwertig. Eine moderne Interpretation des klassischen Gran Turismo: 549 PS aus dem Nettuno-V6, gepaart mit unverwechselbarem Maserati-Stil.",
+      en: "The new Granturismo Trofeo — fully optioned, German-market model with ADAS package, as new. A modern interpretation of the classic grand tourer: 549 hp from the Nettuno V6, paired with unmistakable Maserati style.",
+      fr: "La nouvelle Granturismo Trofeo — entièrement équipée, version allemande avec pack ADAS, à l'état neuf. Une interprétation moderne du grand tourisme classique : 549 ch du V6 Nettuno, alliés au style inimitable Maserati.",
+    },
   },
   {
     id: "porsche-panamera-turbo",
@@ -246,6 +328,11 @@ export const vehicles: Vehicle[] = [
     vatInfo: "included",
     vatRate: 19,
     highlights: ["Turbo", "Burmester", "Air Suspension"],
+    description: {
+      de: "Die erste Panamera-Generation in Vollausstattung als 500-PS-Turbo. Carbon-Interieur, Burmester-Soundsystem, Luftfahrwerk und adaptive Tempomaten — eine bewährte Sportlimousine mit ausgereifter Technik zum attraktiven Einstiegspreis.",
+      en: "The first-generation Panamera in full specification as the 500 hp Turbo. Carbon interior, Burmester audio, air suspension and adaptive cruise control — a proven sports saloon with mature engineering at an attractive entry price.",
+      fr: "La Panamera première génération en finition complète, en version Turbo de 500 ch. Intérieur carbone, audio Burmester, suspension pneumatique et régulateur adaptatif — une berline sportive éprouvée à un prix d'entrée attractif.",
+    },
   },
   {
     id: "rolls-royce-cullinan",
@@ -260,6 +347,11 @@ export const vehicles: Vehicle[] = [
     price: 319900,
     vatInfo: "not_applicable",
     highlights: ['24" Wheels', "Massage Seats", "Head-Up Display"],
+    description: {
+      de: "Rolls-Royces erstes SUV in vollausgestatteter Konfiguration. 24-Zoll-Felgen, Massagesitze, Head-up-Display, 360°-Kamera und Panoramadach. Übergabe mit Garantie und persönlicher Einweisung — das luxuriöseste Geländefahrzeug seiner Klasse.",
+      en: "Rolls-Royce's first SUV in fully optioned form. 24-inch wheels, massage seats, head-up display, 360° camera and panoramic roof. Handed over with warranty and a personal walk-through — the most luxurious off-road vehicle in its class.",
+      fr: "Le premier SUV de Rolls-Royce dans sa configuration la plus complète. Jantes 24 pouces, sièges massants, affichage tête haute, caméra 360° et toit panoramique. Remise avec garantie et présentation personnalisée — le véhicule tout-terrain le plus luxueux de sa catégorie.",
+    },
   },
   {
     id: "rolls-royce-ghost",
@@ -274,6 +366,11 @@ export const vehicles: Vehicle[] = [
     price: 159900,
     vatInfo: "not_applicable",
     highlights: ["Series II", "Theatre Package", "Panorama"],
+    description: {
+      de: "Die Ghost Series II in eleganter Konfiguration mit Theatre-Paket für die Fondpassagiere, Panoramadach, Top-View-Kamera und vollem Assistenzpaket. Diskretes Understatement und kompromisslose Verarbeitung — typisch Rolls-Royce.",
+      en: "The Ghost Series II in elegant configuration with rear-seat Theatre Package, panoramic roof, top-view camera and full driver assistance package. Discreet understatement and uncompromising craftsmanship — quintessentially Rolls-Royce.",
+      fr: "La Ghost Series II dans une configuration élégante avec Theatre Package pour les passagers arrière, toit panoramique, caméra vision dessus et pack d'assistance complet. Sobriété discrète et fabrication sans compromis — une Rolls-Royce dans son essence.",
+    },
   },
 ];
 
