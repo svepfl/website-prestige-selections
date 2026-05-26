@@ -180,7 +180,7 @@ export default function Schaufenster() {
             top-20 mobile (= 80px) garantiert kein Overlap auf small viewports.
             Drift versteckt den Text-Swap später hinter der Card (z-10 vs z-20). */}
         <div
-          className="absolute inset-x-0 top-20 md:top-[6%] lg:top-[5%] flex flex-col items-center z-10 pointer-events-none px-6"
+          className="absolute inset-x-0 top-32 md:top-[12%] lg:top-[10%] flex flex-col items-center z-10 pointer-events-none px-6"
           style={{
             transform: `translateY(${titleY}vh)`,
             willChange: 'transform',
