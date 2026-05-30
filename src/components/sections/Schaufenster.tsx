@@ -364,7 +364,7 @@ function VehicleSlide({
 
   return (
     <div
-      className="absolute inset-0 flex items-center justify-center px-6 md:px-10 lg:px-14 pt-[14vh] sm:pt-0"
+      className="absolute inset-0 flex items-center justify-center px-6 md:px-10 lg:px-14 pt-[14vh] sm:pt-[12vh] md:pt-[10vh] lg:pt-[6vh] xl:pt-0"
       style={{
         opacity,
         transform: `translateY(${translateY}vh)`,

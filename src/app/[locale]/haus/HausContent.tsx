@@ -319,32 +319,32 @@ export default function HausContent() {
         </div>
       </section>
 
-      {/* ═══════════════ HERITAGE — Sticky-Pinned Scroll-Story (Apple Mac-Studio Cinematic Pattern) ═══════════════ */}
+      {/* ═══════════════ HERITAGE — Sticky-Pinned Scroll-Story (Magazine-Tier Light Mode) ═══════════════ */}
       <section
         ref={heritageSectionRef}
-        className="relative bg-shadow text-on-shadow"
+        className="relative bg-canvas text-ink"
         style={{ height: reducedMotion ? 'auto' : '500vh' }}
         aria-labelledby="heritage-label"
       >
         <div className={reducedMotion ? 'py-32 px-6 md:px-10 lg:px-14' : 'sticky top-0 h-screen w-full overflow-hidden'}>
-          {/* Atmospheric Engine-Turned Overlay */}
+          {/* Atmospheric Engine-Turned Overlay — subtle paper-tint texture on light bg */}
           <div
             aria-hidden
-            className="absolute inset-0 pointer-events-none"
+            className="absolute inset-0 pointer-events-none mix-blend-multiply"
             style={{
               backgroundImage: `url(${PULLQUOTE_BG})`,
               backgroundSize: 'cover',
               backgroundPosition: 'center',
-              opacity: 0.05,
+              opacity: 0.04,
             }}
           />
-          {/* Cinema Vignette */}
+          {/* Warm paper vignette — soft gold-tinted top + barely-perceptible bottom fade */}
           <div
             aria-hidden
             className="absolute inset-0 pointer-events-none"
             style={{
               background:
-                'radial-gradient(ellipse 100% 60% at 50% 0%, color-mix(in oklab, var(--color-gold-deep) 6%, transparent) 0%, transparent 60%), linear-gradient(to bottom, transparent 0%, color-mix(in oklab, var(--color-shadow) 30%, transparent) 100%)',
+                'radial-gradient(ellipse 100% 60% at 50% 0%, color-mix(in oklab, var(--color-gold-deep) 5%, transparent) 0%, transparent 60%), linear-gradient(to bottom, transparent 0%, color-mix(in oklab, var(--color-canvas-soft) 60%, transparent) 100%)',
             }}
           />
 
@@ -377,7 +377,7 @@ export default function HausContent() {
                 className="absolute top-0 bottom-0 left-0"
                 style={{
                   width: '1px',
-                  backgroundColor: 'color-mix(in oklab, var(--color-on-shadow) 30%, transparent)',
+                  backgroundColor: 'color-mix(in oklab, var(--color-ink) 22%, transparent)',
                 }}
               />
               {/* RIGHT outer SOLID lane edge */}
@@ -385,7 +385,7 @@ export default function HausContent() {
                 className="absolute top-0 bottom-0 right-0"
                 style={{
                   width: '1px',
-                  backgroundColor: 'color-mix(in oklab, var(--color-on-shadow) 30%, transparent)',
+                  backgroundColor: 'color-mix(in oklab, var(--color-ink) 22%, transparent)',
                 }}
               />
               {/* CENTER dashed lane divider (Mittelstreifen) */}
@@ -394,7 +394,7 @@ export default function HausContent() {
                 style={{
                   width: '2px',
                   backgroundImage:
-                    'linear-gradient(to bottom, color-mix(in oklab, var(--color-on-shadow) 38%, transparent) 0 24px, transparent 24px 54px)',
+                    'linear-gradient(to bottom, color-mix(in oklab, var(--color-ink) 28%, transparent) 0 24px, transparent 24px 54px)',
                   backgroundSize: '100% 54px',
                   backgroundRepeat: 'repeat-y',
                 }}
@@ -442,7 +442,7 @@ export default function HausContent() {
                 className="absolute top-0 bottom-0 left-0"
                 style={{
                   width: '1px',
-                  backgroundColor: 'color-mix(in oklab, var(--color-on-shadow) 30%, transparent)',
+                  backgroundColor: 'color-mix(in oklab, var(--color-ink) 22%, transparent)',
                 }}
               />
               {/* RIGHT outer solid */}
@@ -450,7 +450,7 @@ export default function HausContent() {
                 className="absolute top-0 bottom-0 right-0"
                 style={{
                   width: '1px',
-                  backgroundColor: 'color-mix(in oklab, var(--color-on-shadow) 30%, transparent)',
+                  backgroundColor: 'color-mix(in oklab, var(--color-ink) 22%, transparent)',
                 }}
               />
               {/* CENTER dashed */}
@@ -459,7 +459,7 @@ export default function HausContent() {
                 style={{
                   width: '2px',
                   backgroundImage:
-                    'linear-gradient(to bottom, color-mix(in oklab, var(--color-on-shadow) 38%, transparent) 0 16px, transparent 16px 36px)',
+                    'linear-gradient(to bottom, color-mix(in oklab, var(--color-ink) 28%, transparent) 0 16px, transparent 16px 36px)',
                   backgroundSize: '100% 36px',
                   backgroundRepeat: 'repeat-y',
                 }}
@@ -512,7 +512,7 @@ export default function HausContent() {
                     willChange: 'transform',
                   }}
                 >
-                  <div className="relative aspect-[4/5] rounded-xl overflow-hidden bg-shadow-soft">
+                  <div className="relative aspect-[4/5] rounded-xl overflow-hidden bg-canvas-soft">
                     <Image
                       src={img.src}
                       alt={t(img.altKey as 'heritage1Alt')}
@@ -552,17 +552,17 @@ export default function HausContent() {
                           width: 'clamp(420px, 56vw, 760px)',
                           height: 'clamp(280px, 38vh, 440px)',
                           background:
-                            'radial-gradient(ellipse at center, var(--color-shadow) 35%, color-mix(in oklab, var(--color-shadow) 75%, transparent) 62%, transparent 80%)',
+                            'radial-gradient(ellipse at center, var(--color-canvas) 65%, color-mix(in oklab, var(--color-canvas) 88%, transparent) 62%, transparent 80%)',
                         }}
                       />
                       <p
-                        className="relative font-display italic text-on-shadow leading-[1.1] tracking-[-0.025em]"
+                        className="relative font-display italic text-ink leading-[1.1] tracking-[-0.025em]"
                         style={{ fontWeight: 300, fontSize: 'clamp(2.5rem, 6vw, 5rem)' }}
                       >
                         {t('heritageH1')}
                       </p>
                       <p
-                        className="relative mt-6 font-sans text-on-shadow-muted leading-[1.55] max-w-[36ch] px-4"
+                        className="relative mt-6 font-sans text-ink-muted leading-[1.55] max-w-[36ch] px-4"
                         style={{ fontWeight: 400, fontSize: 'clamp(0.95rem, 1.1vw, 1.1rem)' }}
                       >
                         {t('heritageSubline')}
@@ -600,7 +600,7 @@ export default function HausContent() {
                           width: 'clamp(420px, 56vw, 760px)',
                           height: 'clamp(320px, 44vh, 500px)',
                           background:
-                            'radial-gradient(ellipse at center, var(--color-shadow) 38%, color-mix(in oklab, var(--color-shadow) 75%, transparent) 62%, transparent 80%)',
+                            'radial-gradient(ellipse at center, var(--color-canvas) 68%, color-mix(in oklab, var(--color-canvas) 88%, transparent) 62%, transparent 80%)',
                         }}
                       />
                       <p
@@ -615,13 +615,13 @@ export default function HausContent() {
                           fontWeight: 300,
                           fontSize: 'clamp(4rem, 10vw, 8.5rem)',
                           textShadow:
-                            '0 0 40px var(--color-shadow), 0 0 80px var(--color-shadow)',
+                            '0 0 40px var(--color-canvas), 0 0 80px var(--color-canvas)',
                         }}
                       >
                         {t(`milestone${m}Year` as 'milestone1Year')}
                       </p>
                       <p
-                        className="relative mt-6 md:mt-8 font-display italic text-on-shadow leading-[1.4] max-w-[36ch] px-4"
+                        className="relative mt-6 md:mt-8 font-display italic text-ink leading-[1.4] max-w-[36ch] px-4"
                         style={{ fontWeight: 300, fontSize: 'clamp(1.05rem, 1.4vw, 1.375rem)' }}
                       >
                         {t(`milestone${m}Text` as 'milestone1Text')}
@@ -649,7 +649,7 @@ export default function HausContent() {
               <div className="mx-auto max-w-[44ch] text-center">
                 <blockquote>
                   <p
-                    className="font-display italic text-on-shadow leading-[1.1] tracking-[-0.025em]"
+                    className="font-display italic text-ink leading-[1.1] tracking-[-0.025em]"
                     style={{ fontWeight: 300, fontSize: 'clamp(1.875rem, 4.5vw, 3.75rem)' }}
                   >
                     {t('pullQuote')}
@@ -665,10 +665,10 @@ export default function HausContent() {
                 </blockquote>
                 <span
                   aria-hidden
-                  className="block w-12 h-px mx-auto my-7 md:my-8 bg-on-shadow-muted/40"
+                  className="block w-12 h-px mx-auto my-7 md:my-8 bg-ink-muted/40"
                 />
                 <p
-                  className="font-mono-spec text-[10px] uppercase tracking-[0.32em] text-on-shadow-muted"
+                  className="font-mono-spec text-[10px] uppercase tracking-[0.32em] text-ink-muted"
                   style={{ fontWeight: 500 }}
                 >
                   {t('roadEndcap')}
@@ -682,12 +682,12 @@ export default function HausContent() {
             <div className="relative mx-auto max-w-[1500px] mt-16 space-y-20">
               <div className="text-center mb-16">
                 <p
-                  className="font-display italic text-on-shadow leading-[1.1] tracking-[-0.025em]"
+                  className="font-display italic text-ink leading-[1.1] tracking-[-0.025em]"
                   style={{ fontWeight: 300, fontSize: 'clamp(2rem, 5vw, 4rem)' }}
                 >
                   {t('heritageH1')}
                 </p>
-                <p className="mt-4 font-sans text-on-shadow-muted max-w-[40ch] mx-auto">
+                <p className="mt-4 font-sans text-ink-muted max-w-[40ch] mx-auto">
                   {t('heritageSubline')}
                 </p>
               </div>
@@ -695,7 +695,7 @@ export default function HausContent() {
                 const img = HERITAGE_IMAGES[idx]!;
                 return (
                   <div key={m} className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
-                    <div className="relative aspect-[4/5] max-w-[320px] mx-auto rounded-xl overflow-hidden bg-shadow-soft">
+                    <div className="relative aspect-[4/5] max-w-[320px] mx-auto rounded-xl overflow-hidden bg-canvas-soft">
                       <Image
                         src={img.src}
                         alt={t(img.altKey as 'heritage1Alt')}
@@ -715,7 +715,7 @@ export default function HausContent() {
                         {t(`milestone${m}Year` as 'milestone1Year')}
                       </p>
                       <p
-                        className="font-display italic text-on-shadow"
+                        className="font-display italic text-ink"
                         style={{ fontSize: 'clamp(1rem, 1.3vw, 1.25rem)', fontWeight: 300 }}
                       >
                         {t(`milestone${m}Text` as 'milestone1Text')}
