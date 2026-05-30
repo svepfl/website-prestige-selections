@@ -51,13 +51,29 @@ import Abschluss from '@/components/sections/Abschluss';
 export default function HomePage() {
   return (
     <>
-      {/* Resource hints — Akt I erstes Frame priority-preload für instant LCP */}
+      {/* Resource hints — preload the images user will see in the first
+          ~2 viewport-heights of scrolling. The LCP frame loads with
+          fetchPriority=high; the next section's hero images load with a
+          lower priority but still start before the browser's lazy-loader
+          would kick in. */}
       <link
         rel="preload"
         href="/assets/videos/frames/frame-001.jpg"
         as="image"
         type="image/jpeg"
         fetchPriority="high"
+      />
+      <link
+        rel="preload"
+        href="/assets/founder/sven-pflueger.webp"
+        as="image"
+        type="image/webp"
+      />
+      <link
+        rel="preload"
+        href="/assets/atmospherics/markenwelt-engine-turned.webp"
+        as="image"
+        type="image/webp"
       />
 
       <TorReveal />

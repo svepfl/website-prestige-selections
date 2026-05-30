@@ -58,6 +58,14 @@ const securityHeaders = [
 
 const nextConfig: NextConfig = {
   images: {
+    // AVIF first (≈30% smaller than WebP for same quality) with WebP
+    // fallback. Browser picks the best one it supports via Accept-header
+    // negotiation.
+    formats: ["image/avif", "image/webp"],
+    // 1-year cache on optimised image variants. Cloudflare Workers / edge
+    // honours this, so every visitor past the first hits a cached variant
+    // instead of triggering re-optimisation on every request.
+    minimumCacheTTL: 31536000,
     remotePatterns: [
       {
         protocol: "https",

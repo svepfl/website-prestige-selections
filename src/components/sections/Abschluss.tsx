@@ -160,7 +160,7 @@ export default function Abschluss({
                   fill
                   sizes="(max-width: 1500px) 100vw, 1500px"
                   className="object-cover [object-position:75%_28%] sm:[object-position:right_center]"
-                  priority={false}
+                  priority
                 />
 
                 {/* Gradient — LEFT dark → RIGHT transparent (Desktop).

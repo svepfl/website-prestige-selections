@@ -1,12 +1,29 @@
 # Cloudflare Workers Assets — custom cache headers
-# Frames + atmospheric assets never change content; treat them immutable so
-# returning visitors hit the browser cache + CF edge instantly.
+# Returning visitors should hit the browser cache + CF edge instantly so
+# scrolling never waits on images.
 
+# Video-frame sequence and atmospheric backgrounds never change.
 /assets/videos/*
   Cache-Control: public, max-age=31536000, immutable
 
+/assets/atmospherics/*
+  Cache-Control: public, max-age=31536000, immutable
+
+# Photo assets — 1 year, allow re-validation but heavy caching.
 /assets/*.webp
-  Cache-Control: public, max-age=2592000
+  Cache-Control: public, max-age=31536000
+
+/assets/*.jpg
+  Cache-Control: public, max-age=31536000
 
 /assets/*
   Cache-Control: public, max-age=2592000
+
+# Optimised image variants served by Next.js / OpenNext — also 1 year. The
+# variant URL contains w + q parameters so different variants get different
+# cache keys naturally; the actual bytes for a given variant never change.
+/_next/image*
+  Cache-Control: public, max-age=31536000, immutable
+
+/_next/static/*
+  Cache-Control: public, max-age=31536000, immutable

@@ -83,7 +83,12 @@ export default function Schaufenster() {
   const slideCount = featured.length;
 
   function computeSlide(i: number, p: number) {
-    const SPEED_VH = 180;
+    // SPEED_VH = how far adjacent slides sit apart vertically at any moment.
+    // 150 is the tuned middle: slides crossfade cleanly without floating
+    // apart with a huge empty canvas band between them. Combined with the
+    // title-drift + swap-timing below, the watermark title is still
+    // perfectly hidden behind the photo at each text-swap moment.
+    const SPEED_VH = 150;
     const FADE_START_VH = 60;
     const FADE_END_VH = 90;
     const isLast = i === slideCount - 1;
@@ -103,7 +108,9 @@ export default function Schaufenster() {
     return { opacity, translateY };
   }
 
-  const TITLE_FADE_OUT_START = 0.82;
+  // Title-Fade-Out near section end so the last title (slide-3) still has
+  // generous visible scroll-time before it disappears.
+  const TITLE_FADE_OUT_START = 0.92;
   let titleVisibility = 1;
   if (progress > TITLE_FADE_OUT_START) {
     titleVisibility = Math.max(
@@ -111,23 +118,38 @@ export default function Schaufenster() {
       1 - (progress - TITLE_FADE_OUT_START) / (1 - TITLE_FADE_OUT_START),
     );
   }
-  // Moderater Drift — Title beginnt oben als Section-Headline, driftet
-  // dann in die Photo-Card-Zone wo der Text-Swap unsichtbar hinter dem
-  // Card (z-10 vs z-20) passiert.
-  const titleY = progress * 55;
-  const titleOpacity = 0.55 * titleVisibility;
-  const subtitleOpacity = 0.90 * titleVisibility;
 
-  // Swap-Timing: nicht closest-to-center (würde bei p=0.75 swappen, da ist
-  // kein Foto am Title-Position → Swap sichtbar). Stattdessen früher: bei
-  // p≈0.23 (1→2) und p≈0.57 (2→3) — beide Momente ist der ausscheidende
-  // Slide noch zentriert genug, dass sein Foto die Title-Position abdeckt.
-  // Floor mit Offset 0.1 → Swaps shiften gleichmäßig nach vorne.
-  const TITLE_SWAP_OFFSET = 0.1;
+  // Title is anchored at the top — no drift. The text-swap is hidden by a
+  // narrow opacity-dip-to-zero in a ±SWAP_FADE_ZONE window around each
+  // swap-point. This guarantees the swap is INVISIBLE on every viewport
+  // identically (mobile, MacBook, 4K) because it's bound purely to scroll
+  // progress, not to per-viewport photo geometry. Slide N's title becomes
+  // active at the midpoint between slide N-1 and slide N's centred-p
+  // (so title N is shown while user is reading slide N).
+  const titleY = 0;
   const activeTitleIndex = Math.min(
     slideCount - 1,
-    Math.floor((progress + TITLE_SWAP_OFFSET) * slideCount),
+    Math.max(0, Math.round(progress * (slideCount - 1))),
   );
+
+  // Swap-points sit at midpoints between adjacent slide-centres. For three
+  // slides centred at p=0, 0.5, 1, swaps happen at p=0.25 and p=0.75.
+  const swapPoints: number[] = [];
+  for (let i = 1; i < slideCount; i++) {
+    swapPoints.push((2 * i - 1) / (2 * (slideCount - 1)));
+  }
+  const SWAP_FADE_ZONE = 0.045;
+  const distToNearestSwap = swapPoints.reduce(
+    (min, s) => Math.min(min, Math.abs(progress - s)),
+    Infinity,
+  );
+  const swapFade = Math.min(1, distToNearestSwap / SWAP_FADE_ZONE);
+
+  // Title visible at full opacity when reading a slide; fades to zero in a
+  // narrow ±4.5%-progress window around each swap-point so the text-change
+  // happens invisibly.
+  const titleOpacity = swapFade * 0.85 * titleVisibility;
+  const subtitleOpacity = swapFade * 0.85 * titleVisibility;
   const slideKey = (activeTitleIndex + 1) as 1 | 2 | 3;
   const titleKey = `slideTitle${slideKey}` as
     | 'slideTitle1'
@@ -175,12 +197,12 @@ export default function Schaufenster() {
         </div>
 
         {/* Section Title — zweizeilig (whitespace-pre-line ehrt das `\n`
-            in den Translations). Sitzt oben über der Photo-Card mit klarem
-            Headline-Abstand zu den Top-Markers (top-8 mobile / top-12 desktop).
-            top-20 mobile (= 80px) garantiert kein Overlap auf small viewports.
-            Drift versteckt den Text-Swap später hinter der Card (z-10 vs z-20). */}
+            in den Translations). Position uses a single clamped vh value so
+            it sits in the upper-third area on every viewport with a clear
+            band of canvas to the navbar above AND to the photo below — no
+            longer cramped against the navbar on lg viewports. */}
         <div
-          className="absolute inset-x-0 top-32 md:top-[12%] lg:top-[10%] flex flex-col items-center z-10 pointer-events-none px-6"
+          className="absolute inset-x-0 top-[clamp(112px,15vh,240px)] flex flex-col items-center z-10 pointer-events-none px-6"
           style={{
             transform: `translateY(${titleY}vh)`,
             willChange: 'transform',
@@ -233,9 +255,12 @@ export default function Schaufenster() {
           })}
         </div>
 
-        {/* Section CTA — fades in at end of scroll */}
+        {/* Section CTA — fades in at end of scroll. Positioned at bottom-24/32
+            (96/128 px) so the gap from the CTA bottom-edge to the section seam
+            mirrors the py-24/py-32 padding rhythm other sections use between
+            themselves — no more glued-to-Markenwelt feel. */}
         <div
-          className="absolute bottom-8 md:bottom-10 left-1/2 -translate-x-1/2 z-30"
+          className="absolute bottom-24 md:bottom-32 left-1/2 -translate-x-1/2 z-30"
           style={{
             opacity: Math.max(0, Math.min(1, (progress - 0.65) / 0.25)),
             pointerEvents: progress > 0.85 ? 'auto' : 'none',
@@ -364,7 +389,11 @@ function VehicleSlide({
 
   return (
     <div
-      className="absolute inset-0 flex items-center justify-center px-6 md:px-10 lg:px-14 pt-[14vh] sm:pt-[12vh] md:pt-[10vh] lg:pt-[6vh] xl:pt-0"
+      // Photo-Card area. Top-clamp matched to the title's new lower position
+      // so the title-photo gap stays comfortable (30-100px) on every
+      // viewport. Bottom-clamp leaves room for the CTA + a clean canvas
+      // band before the next section.
+      className="absolute top-[clamp(300px,36vh,500px)] inset-x-0 bottom-[clamp(220px,24vh,320px)] flex items-center justify-center px-6 md:px-10 lg:px-14"
       style={{
         opacity,
         transform: `translateY(${translateY}vh)`,
@@ -377,12 +406,25 @@ function VehicleSlide({
       <Link
         ref={cardRef}
         href={`/fahrzeuge/${vehicle.id}` as '/fahrzeuge'}
-        className="group block w-full max-w-[1500px] overflow-hidden rounded-lg focus-ring bg-shadow"
+        className="group block w-full overflow-hidden rounded-lg focus-ring bg-shadow"
+        // Photo-Card: single 21/9 cinematic ratio across every viewport.
+        // Wider than 16/9 → more horizontal canvas for the caption-band
+        // (vehicle model + quote + specs all fit without truncation).
+        // Width = wrapper-height × 21/9, capped at 1500px. On viewports
+        // where the wrapper has horizontal room left, the photo card sits
+        // centred with empty side margins — that's the magazine-frame
+        // intent. On phones it fills the viewport width.
+        style={{
+          maxWidth:
+            'min(1500px, calc((100vh - clamp(300px, 36vh, 500px) - clamp(220px, 24vh, 320px) - 12px) * 21 / 9))',
+        }}
         aria-label={`${vehicle.manufacturer} ${vehicle.model}`}
       >
-        {/* Photo plate — Cinemascope. Headline + Lot-Mark sitzen ABSOLUT
-            in der Fade-Zone, wie ein Filmposter-Titel. */}
-        <div className="relative w-full aspect-[4/5] sm:aspect-[16/10] md:aspect-[21/9] overflow-hidden">
+        {/* Photo plate — uniform 21/9 cinematic. Vehicle (centred in the
+            5/4 source) stays fully visible; object-cover trims sky/road
+            off top + bottom of source. Headline + Lot-Mark sit absolutely
+            inside the fade-zone caption-band. */}
+        <div className="relative w-full aspect-[21/9] overflow-hidden">
           <div
             ref={imageWrapRef}
             className="absolute inset-0 will-change-transform"
@@ -415,10 +457,10 @@ function VehicleSlide({
                   Lot {lotNumber} — {vehicle.manufacturer}
                 </p>
                 <h3
-                  className="font-sans text-on-shadow uppercase tracking-[-0.02em] leading-[0.92] truncate"
+                  className="font-sans text-on-shadow uppercase tracking-[-0.02em] leading-[0.92] [overflow-wrap:anywhere] min-w-0"
                   style={{
                     fontWeight: 700,
-                    fontSize: 'clamp(1.75rem, 3.6vw, 3.5rem)',
+                    fontSize: 'clamp(1.5rem, 3.2vw, 3rem)',
                   }}
                 >
                   {vehicle.model}

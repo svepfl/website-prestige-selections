@@ -111,7 +111,7 @@ export default function HausContent() {
       />
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: jsonLd(buildBreadcrumb(locale, [{ name: t('title'), path: '/haus' }])) }}
+        dangerouslySetInnerHTML={{ __html: jsonLd(buildBreadcrumb(locale, [{ name: t('label'), path: '/haus' }])) }}
       />
 
       {/* ═══════════════ HERO — Full-Bleed Cinema (Pattern A canonical) ═══════════════ */}
@@ -322,7 +322,7 @@ export default function HausContent() {
       {/* ═══════════════ HERITAGE — Sticky-Pinned Scroll-Story (Magazine-Tier Light Mode) ═══════════════ */}
       <section
         ref={heritageSectionRef}
-        className="relative bg-canvas text-ink"
+        className="relative bg-shadow text-on-shadow"
         style={{ height: reducedMotion ? 'auto' : '500vh' }}
         aria-labelledby="heritage-label"
       >
@@ -330,12 +330,12 @@ export default function HausContent() {
           {/* Atmospheric Engine-Turned Overlay — subtle paper-tint texture on light bg */}
           <div
             aria-hidden
-            className="absolute inset-0 pointer-events-none mix-blend-multiply"
+            className="absolute inset-0 pointer-events-none"
             style={{
               backgroundImage: `url(${PULLQUOTE_BG})`,
               backgroundSize: 'cover',
               backgroundPosition: 'center',
-              opacity: 0.04,
+              opacity: 0.05,
             }}
           />
           {/* Warm paper vignette — soft gold-tinted top + barely-perceptible bottom fade */}
@@ -344,7 +344,7 @@ export default function HausContent() {
             className="absolute inset-0 pointer-events-none"
             style={{
               background:
-                'radial-gradient(ellipse 100% 60% at 50% 0%, color-mix(in oklab, var(--color-gold-deep) 5%, transparent) 0%, transparent 60%), linear-gradient(to bottom, transparent 0%, color-mix(in oklab, var(--color-canvas-soft) 60%, transparent) 100%)',
+                'radial-gradient(ellipse 100% 60% at 50% 0%, color-mix(in oklab, var(--color-gold-deep) 6%, transparent) 0%, transparent 60%), linear-gradient(to bottom, transparent 0%, color-mix(in oklab, var(--color-shadow) 30%, transparent) 100%)',
             }}
           />
 
@@ -377,7 +377,7 @@ export default function HausContent() {
                 className="absolute top-0 bottom-0 left-0"
                 style={{
                   width: '1px',
-                  backgroundColor: 'color-mix(in oklab, var(--color-ink) 22%, transparent)',
+                  backgroundColor: 'color-mix(in oklab, var(--color-on-shadow) 30%, transparent)',
                 }}
               />
               {/* RIGHT outer SOLID lane edge */}
@@ -385,7 +385,7 @@ export default function HausContent() {
                 className="absolute top-0 bottom-0 right-0"
                 style={{
                   width: '1px',
-                  backgroundColor: 'color-mix(in oklab, var(--color-ink) 22%, transparent)',
+                  backgroundColor: 'color-mix(in oklab, var(--color-on-shadow) 30%, transparent)',
                 }}
               />
               {/* CENTER dashed lane divider (Mittelstreifen) */}
@@ -394,25 +394,27 @@ export default function HausContent() {
                 style={{
                   width: '2px',
                   backgroundImage:
-                    'linear-gradient(to bottom, color-mix(in oklab, var(--color-ink) 28%, transparent) 0 24px, transparent 24px 54px)',
+                    'linear-gradient(to bottom, color-mix(in oklab, var(--color-on-shadow) 38%, transparent) 0 24px, transparent 24px 54px)',
                   backgroundSize: '100% 54px',
                   backgroundRepeat: 'repeat-y',
                 }}
               />
-              {/* Gold scroll-trail overlay on center — gold replaces dashes as user travels */}
+              {/* Scroll-trail overlay on center — muted off-white that recedes behind
+                  the text without disappearing. Held intentionally low-contrast (50%
+                  on-shadow) so it reads as a structural lane element, not a feature
+                  line. The dark text-shadow halos on year + body easily absorb it
+                  where letters cross. Gold is reserved for the destination terminator. */}
               <div className="absolute top-0 bottom-0 left-1/2 -translate-x-1/2 overflow-hidden" style={{ width: '2px' }}>
                 <div
                   className="absolute inset-0 w-full origin-top"
                   style={{
                     transform: `scaleY(${trailProgress})`,
-                    backgroundColor: 'var(--color-gold)',
-                    boxShadow:
-                      '0 0 14px color-mix(in oklab, var(--color-gold) 55%, transparent), 0 0 4px color-mix(in oklab, var(--color-gold) 90%, transparent)',
+                    backgroundColor: 'color-mix(in oklab, var(--color-on-shadow) 50%, transparent)',
                     transition: 'transform 60ms linear',
                   }}
                 />
               </div>
-              {/* Road Terminator — horizontal hairline crossing road at bottom edge, appears during endcap */}
+              {/* Road Terminator — gold destination marker (no text crosses it) */}
               <div
                 aria-hidden
                 className="absolute left-0 right-0 bottom-0 h-px"
@@ -442,7 +444,7 @@ export default function HausContent() {
                 className="absolute top-0 bottom-0 left-0"
                 style={{
                   width: '1px',
-                  backgroundColor: 'color-mix(in oklab, var(--color-ink) 22%, transparent)',
+                  backgroundColor: 'color-mix(in oklab, var(--color-on-shadow) 30%, transparent)',
                 }}
               />
               {/* RIGHT outer solid */}
@@ -450,7 +452,7 @@ export default function HausContent() {
                 className="absolute top-0 bottom-0 right-0"
                 style={{
                   width: '1px',
-                  backgroundColor: 'color-mix(in oklab, var(--color-ink) 22%, transparent)',
+                  backgroundColor: 'color-mix(in oklab, var(--color-on-shadow) 30%, transparent)',
                 }}
               />
               {/* CENTER dashed */}
@@ -459,24 +461,24 @@ export default function HausContent() {
                 style={{
                   width: '2px',
                   backgroundImage:
-                    'linear-gradient(to bottom, color-mix(in oklab, var(--color-ink) 28%, transparent) 0 16px, transparent 16px 36px)',
+                    'linear-gradient(to bottom, color-mix(in oklab, var(--color-on-shadow) 38%, transparent) 0 16px, transparent 16px 36px)',
                   backgroundSize: '100% 36px',
                   backgroundRepeat: 'repeat-y',
                 }}
               />
-              {/* Gold scroll-trail */}
+              {/* Scroll-trail — muted off-white, mirrors desktop. Held low so it
+                  recedes behind the year text without disappearing. */}
               <div className="absolute top-0 bottom-0 left-1/2 -translate-x-1/2 overflow-hidden" style={{ width: '2px' }}>
                 <div
                   className="absolute inset-0 w-full origin-top"
                   style={{
                     transform: `scaleY(${trailProgress})`,
-                    backgroundColor: 'var(--color-gold)',
-                    boxShadow: '0 0 10px color-mix(in oklab, var(--color-gold) 55%, transparent)',
+                    backgroundColor: 'color-mix(in oklab, var(--color-on-shadow) 50%, transparent)',
                     transition: 'transform 60ms linear',
                   }}
                 />
               </div>
-              {/* Mobile Road Terminator */}
+              {/* Mobile Road Terminator — gold destination marker */}
               <div
                 aria-hidden
                 className="absolute left-0 right-0 bottom-0 h-px"
@@ -512,7 +514,7 @@ export default function HausContent() {
                     willChange: 'transform',
                   }}
                 >
-                  <div className="relative aspect-[4/5] rounded-xl overflow-hidden bg-canvas-soft">
+                  <div className="relative aspect-[4/5] rounded-xl overflow-hidden bg-shadow-soft">
                     <Image
                       src={img.src}
                       alt={t(img.altKey as 'heritage1Alt')}
@@ -525,11 +527,15 @@ export default function HausContent() {
               );
             })}
 
-          {/* Center Text Stack — heading → milestones → endcap, continuous cross-fade */}
+          {/* Center Text Stack — heading → milestone-cards → endcap, continuous cross-fade.
+              Pattern: heading floats freely (section opener · road passes through type),
+              milestones live in defined milestone-card backplates (visual "stops" along
+              the road — like motorway exit-signs anchored on solid plates). No radial
+              gradient masks (those read as awkward soft blobs against the bricks behind). */}
           {!reducedMotion && (
             <div className="absolute inset-0 z-20 flex items-center justify-center px-6 pointer-events-none">
-              <div className="relative max-w-[40ch] text-center w-full">
-                {/* State 0: Heading */}
+              <div className="relative max-w-[44ch] text-center w-full">
+                {/* State 0: Heading — free-floating intro, no card */}
                 {(() => {
                   const op = stateOpacity(progress, -0.04, 0.07);
                   return (
@@ -541,29 +547,24 @@ export default function HausContent() {
                         willChange: 'opacity, transform',
                       }}
                     >
-                      {/* Backdrop shield — masks road behind text */}
-                      <div
-                        aria-hidden
-                        className="absolute pointer-events-none"
-                        style={{
-                          top: '50%',
-                          left: '50%',
-                          transform: 'translate(-50%, -50%)',
-                          width: 'clamp(420px, 56vw, 760px)',
-                          height: 'clamp(280px, 38vh, 440px)',
-                          background:
-                            'radial-gradient(ellipse at center, var(--color-canvas) 65%, color-mix(in oklab, var(--color-canvas) 88%, transparent) 62%, transparent 80%)',
-                        }}
-                      />
                       <p
-                        className="relative font-display italic text-ink leading-[1.1] tracking-[-0.025em]"
-                        style={{ fontWeight: 300, fontSize: 'clamp(2.5rem, 6vw, 5rem)' }}
+                        className="font-display italic text-on-shadow leading-[1.1] tracking-[-0.025em]"
+                        style={{
+                          fontWeight: 300,
+                          fontSize: 'clamp(2.5rem, 6vw, 5rem)',
+                          textShadow:
+                            '0 2px 24px var(--color-shadow), 0 0 60px color-mix(in oklab, var(--color-shadow) 80%, transparent)',
+                        }}
                       >
                         {t('heritageH1')}
                       </p>
                       <p
-                        className="relative mt-6 font-sans text-ink-muted leading-[1.55] max-w-[36ch] px-4"
-                        style={{ fontWeight: 400, fontSize: 'clamp(0.95rem, 1.1vw, 1.1rem)' }}
+                        className="mt-6 font-sans text-on-shadow-muted leading-[1.55] max-w-[36ch] px-4"
+                        style={{
+                          fontWeight: 400,
+                          fontSize: 'clamp(0.95rem, 1.1vw, 1.1rem)',
+                          textShadow: '0 1px 10px var(--color-shadow)',
+                        }}
                       >
                         {t('heritageSubline')}
                       </p>
@@ -571,11 +572,13 @@ export default function HausContent() {
                   );
                 })()}
 
-                {/* States 1-5: Milestones — backdrop shield masks road + text-shadow on year for clean readability */}
+                {/* States 1-5: Milestones — free-floating text with strong dark text-shadow
+                    halos (same pattern as the heading state). The dark halo around each letter
+                    masks the road-trail behind it, so text reads clean over the lane-markings.
+                    No card backplates — keeps the magazine-tier editorial feel. */}
                 {milestones.map((m, idx) => {
                   const photoCenter = 0.12 + idx * 0.18;
                   const isLast = idx === milestones.length - 1;
-                  // Last milestone gets tighter end so endcap takes over cleanly without overlap
                   const stateStart = photoCenter - 0.085;
                   const stateEnd = isLast ? photoCenter + 0.02 : photoCenter + 0.085;
                   const op = stateOpacity(progress, stateStart, stateEnd);
@@ -589,40 +592,33 @@ export default function HausContent() {
                         willChange: 'opacity, transform',
                       }}
                     >
-                      {/* Backdrop shield — radial dark ellipse masks road behind text */}
-                      <div
-                        aria-hidden
-                        className="absolute pointer-events-none"
-                        style={{
-                          top: '50%',
-                          left: '50%',
-                          transform: 'translate(-50%, -50%)',
-                          width: 'clamp(420px, 56vw, 760px)',
-                          height: 'clamp(320px, 44vh, 500px)',
-                          background:
-                            'radial-gradient(ellipse at center, var(--color-canvas) 68%, color-mix(in oklab, var(--color-canvas) 88%, transparent) 62%, transparent 80%)',
-                        }}
-                      />
                       <p
-                        className="relative font-mono-spec tabular-nums text-[10px] uppercase tracking-[0.32em] text-gold mb-6"
-                        style={{ fontWeight: 500 }}
+                        className="font-mono-spec tabular-nums text-[10px] uppercase tracking-[0.32em] text-gold mb-6"
+                        style={{
+                          fontWeight: 500,
+                          textShadow: '0 1px 10px var(--color-shadow)',
+                        }}
                       >
                         {String(idx + 1).padStart(2, '0')} · {t('milestoneLabel')}
                       </p>
                       <p
-                        className="relative font-display italic tabular-nums text-gold leading-none"
+                        className="font-display italic tabular-nums text-gold leading-none"
                         style={{
                           fontWeight: 300,
                           fontSize: 'clamp(4rem, 10vw, 8.5rem)',
                           textShadow:
-                            '0 0 40px var(--color-canvas), 0 0 80px var(--color-canvas)',
+                            '0 2px 32px var(--color-shadow), 0 0 70px var(--color-shadow), 0 0 14px var(--color-shadow)',
                         }}
                       >
                         {t(`milestone${m}Year` as 'milestone1Year')}
                       </p>
                       <p
-                        className="relative mt-6 md:mt-8 font-display italic text-ink leading-[1.4] max-w-[36ch] px-4"
-                        style={{ fontWeight: 300, fontSize: 'clamp(1.05rem, 1.4vw, 1.375rem)' }}
+                        className="mt-6 md:mt-8 font-display italic text-on-shadow leading-[1.4] max-w-[36ch] px-4 mx-auto"
+                        style={{
+                          fontWeight: 300,
+                          fontSize: 'clamp(1.05rem, 1.4vw, 1.375rem)',
+                          textShadow: '0 1px 14px var(--color-shadow), 0 0 36px color-mix(in oklab, var(--color-shadow) 70%, transparent)',
+                        }}
                       >
                         {t(`milestone${m}Text` as 'milestone1Text')}
                       </p>
@@ -649,7 +645,7 @@ export default function HausContent() {
               <div className="mx-auto max-w-[44ch] text-center">
                 <blockquote>
                   <p
-                    className="font-display italic text-ink leading-[1.1] tracking-[-0.025em]"
+                    className="font-display italic text-on-shadow leading-[1.1] tracking-[-0.025em]"
                     style={{ fontWeight: 300, fontSize: 'clamp(1.875rem, 4.5vw, 3.75rem)' }}
                   >
                     {t('pullQuote')}
@@ -665,10 +661,10 @@ export default function HausContent() {
                 </blockquote>
                 <span
                   aria-hidden
-                  className="block w-12 h-px mx-auto my-7 md:my-8 bg-ink-muted/40"
+                  className="block w-12 h-px mx-auto my-7 md:my-8 bg-on-shadow-muted/40"
                 />
                 <p
-                  className="font-mono-spec text-[10px] uppercase tracking-[0.32em] text-ink-muted"
+                  className="font-mono-spec text-[10px] uppercase tracking-[0.32em] text-on-shadow-muted"
                   style={{ fontWeight: 500 }}
                 >
                   {t('roadEndcap')}
@@ -682,12 +678,12 @@ export default function HausContent() {
             <div className="relative mx-auto max-w-[1500px] mt-16 space-y-20">
               <div className="text-center mb-16">
                 <p
-                  className="font-display italic text-ink leading-[1.1] tracking-[-0.025em]"
+                  className="font-display italic text-on-shadow leading-[1.1] tracking-[-0.025em]"
                   style={{ fontWeight: 300, fontSize: 'clamp(2rem, 5vw, 4rem)' }}
                 >
                   {t('heritageH1')}
                 </p>
-                <p className="mt-4 font-sans text-ink-muted max-w-[40ch] mx-auto">
+                <p className="mt-4 font-sans text-on-shadow-muted max-w-[40ch] mx-auto">
                   {t('heritageSubline')}
                 </p>
               </div>
@@ -695,7 +691,7 @@ export default function HausContent() {
                 const img = HERITAGE_IMAGES[idx]!;
                 return (
                   <div key={m} className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
-                    <div className="relative aspect-[4/5] max-w-[320px] mx-auto rounded-xl overflow-hidden bg-canvas-soft">
+                    <div className="relative aspect-[4/5] max-w-[320px] mx-auto rounded-xl overflow-hidden bg-shadow-soft">
                       <Image
                         src={img.src}
                         alt={t(img.altKey as 'heritage1Alt')}
@@ -715,7 +711,7 @@ export default function HausContent() {
                         {t(`milestone${m}Year` as 'milestone1Year')}
                       </p>
                       <p
-                        className="font-display italic text-ink"
+                        className="font-display italic text-on-shadow"
                         style={{ fontSize: 'clamp(1rem, 1.3vw, 1.25rem)', fontWeight: 300 }}
                       >
                         {t(`milestone${m}Text` as 'milestone1Text')}
