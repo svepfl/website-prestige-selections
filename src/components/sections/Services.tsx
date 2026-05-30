@@ -187,52 +187,13 @@ export default function Services() {
             ))}
           </div>
 
-          {/* Outro — Phone-CTA */}
-          <Reveal delayMs={SERVICES.length * 100 + 400}>
-            <div className="mt-20 md:mt-28 pt-8 border-t border-ink/15 flex flex-wrap items-baseline justify-between gap-4">
-              <p
-                className="font-display italic text-ink-soft leading-snug max-w-[40ch]"
-                style={{
-                  fontWeight: 300,
-                  fontSize: 'clamp(1.1rem, 1.6vw, 1.5rem)',
-                }}
-              >
-                {t('outro')}
-              </p>
-              <ServicesPhoneCta t={t} />
-            </div>
-          </Reveal>
+          {/* Services intentionally ends without its own phone-CTA — the
+              MidPageAnchor section that follows is the dedicated CTA stop
+              (Rule 17 / Heap-2022 decision-zone). Two phone-CTAs back-to-
+              back read as redundant. */}
         </div>
       </div>
     </section>
-  );
-}
-
-/**
- * ServicesPhoneCta — phone link only when the translation actually resolves
- * to a phone number, so a missing translation can never produce `tel:phone`.
- */
-function ServicesPhoneCta({
-  t,
-}: {
-  t: ReturnType<typeof useTranslations<'leistungen'>>;
-}) {
-  const phone = t('phone');
-  if (!phone || !phone.startsWith('+')) return null;
-  return (
-    <a
-      href={`tel:${phone.replace(/\s/g, '')}`}
-      className="group inline-flex items-center gap-2 font-mono-spec text-[11px] md:text-[12px] uppercase tracking-[0.28em] text-ink hover:text-gold-deep transition-colors duration-300 focus-ring rounded-sm tabular-nums"
-      style={{ fontWeight: 600 }}
-    >
-      <span>{phone}</span>
-      <span
-        aria-hidden
-        className="transition-transform duration-300 group-hover:translate-x-1"
-      >
-        →
-      </span>
-    </a>
   );
 }
 
